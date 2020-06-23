@@ -25,7 +25,8 @@ class Search extends React.Component {
 		this.state = {
 			value: '',
 			suggestions: [],
-			searchResults: []
+			searchResults: [],
+			contentArray: []
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -33,6 +34,7 @@ class Search extends React.Component {
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.getSearchResults = this.getSearchResults.bind(this);
+		this.setWikiCards = this.setWikiCards.bind(this);
 	}
 	// Upon Autosuggest's onChange event => update value
 	onChange = (event, { newValue }) => {
@@ -83,6 +85,8 @@ class Search extends React.Component {
 		this.getSearchResults(suggestion);
 		return suggestion;
 	}
+
+	// Calls Wikipedia API with suggestion => call setWikiCards with updated data array
 	getSearchResults = (suggestion) => {
 		console.log('getSearchResults() - suggestion: ', suggestion);
 
@@ -96,26 +100,52 @@ class Search extends React.Component {
 				TEMP_MAX +
 				'&namespace=0&callback=?',
 			function(data) {
-				console.log('getWikiSearchResults() - data[1]: ', data[1]);
-				self.setState({
-					searchResults: data[1]
-				});
+				// console.log('getWikiSearchResults() - data: ', data);
+				// self.setState({
+				// 	searchResults: data[1]
+				// });
+
+				// Strips down to just the name
+				// let myArr = [];
+
+				// for (let i = 0; i < TEMP_MAX; i++) {
+				// 	myArr[i] = data[1][i];
+				// }
+				// self.setWikiCards(myArr);
+				self.setWikiCards(data);
 			}
 		);
 	};
 
 	setWikiCards(thisArr) {
-		console.log('setWikiCards() - stubbed for now');
-		// for (let i = 0; i < thisArr.length; i++) {
-		// 	if (!thisArr[i]) {
-		// 		$('#wikiCard0' + i).hide();
-		// 	} else {
-		// 		displayWikiCards(thisArr, i);
-		// 		$('#wikiCard0' + i).show();
-		// 		document.getElementById('img0' + i).setAttribute('alt', 'loading image...');
-		// 		getImages(thisArr, i);
-		// 	}
-		// }
+		let { contentArray } = this.state;
+
+		console.log('setWikiCards() thisArr: ', thisArr);
+		for (let i = 0; i < thisArr.length; i++) {
+			if (!thisArr[i]) {
+				$('#wikiCard0' + i).hide();
+			} else {
+				console.log('setWikiCards() loop to display thisArr[i]: ', thisArr[i]);
+
+				let tempContentObj = {
+					id: 'card' + i,
+					imgSrc: '',
+					title: thisArr[1][i],
+					text: 'text goes here',
+					url: thisArr[3][i]
+				};
+				// Append current obj's id with index #
+				contentArray[i] = tempContentObj;
+				// displayWikiCards(thisArr, i);
+				// $('#wikiCard0' + i).show();
+				// document.getElementById('img0' + i).setAttribute('alt', 'loading image...');
+				// getImages(thisArr, i);
+			}
+		}
+		// this.setState({
+		// 	contentArray: contentArray
+		// });
+		this.props.onSearch(contentArray);
 	}
 
 	render() {
@@ -144,46 +174,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
-// handleInputChange(e) {
-// 	console.log('e.target.value: ', e.target.value);
-// 	this.getSearchSuggestions(e.target.value);
-// }
-
-// dropdownSuggestions(wikiObj, numSuggestions) {
-// 	// Test for empty searchBox
-// 	if (typeof wikiObj[1] === 'undefined') {
-// 		return;
-// 	}
-
-// 	let suggestions = [];
-
-// 	for (let i = 0; i < numSuggestions; i++) {
-// 		suggestions[i] = wikiObj[1][i];
-// 	}
-// 	$('#searchBox').autocomplete({
-// 		source: suggestions
-// 	});
-// 	$('#searchBox').on('select', function(event, ui) {});
-// }
-
-// 	let suggestions = [];
-
-// 	for (let i = 0; i < numSuggestions; i++) {
-// 		suggestions[i] = data[1][i];
-// 	}
-// 	$('#searchBox').autocomplete({
-// 		source: suggestions
-// 	});
-// 	$('#searchBox').on('select', function(event, ui) {});
-// }
-// dropdownSuggestions(data, numSuggestions);
-
-{
-	/* <input
-					type="text"
-					id="searchBox"
-					onInput={this.handleInputChange}
-					placeholder="Or search Wikipedia for anything..."
-				/> */
-}

@@ -10,7 +10,7 @@ function Inputs(props) {
 		<div className="inputs-wrapper">
 			<WikiTweets />
 			<Location />
-			<Search />
+			<Search onSearch={props.onSearch} />
 		</div>
 	);
 }
