@@ -10,22 +10,29 @@ import CardGrid from './Components/CardGrid';
 import './styles/index.scss';
 import './styles/base/app.scss';
 
+// Need to require the image for Parcel to pre-load in the bundler
+const cardImg = require('./images/cardImage.png');
 // TEMP FOR TESTING ONLY!!!
 const testArray = [
 	{
-		text: 'card #1 from App.jsx'
+		title: 'card #1 from App.jsx',
+		imgSrc: cardImg
 	},
 	{
-		text: 'card #2 from App.jsx'
+		title: 'card #2 from App.jsx',
+		imgSrc: cardImg
 	},
 	{
-		text: 'card #3 from App.jsx'
+		title: 'card #3 from App.jsx',
+		imgSrc: cardImg
 	},
 	{
-		text: 'card #4 from App.jsx'
+		title: 'card #4 from App.jsx',
+		imgSrc: cardImg
 	},
 	{
-		text: 'card #5 from App.jsx'
+		title: 'card #5 from App.jsx',
+		imgSrc: cardImg
 	}
 ];
 
