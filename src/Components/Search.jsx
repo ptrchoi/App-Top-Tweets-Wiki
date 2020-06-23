@@ -2,16 +2,22 @@ import React from 'react';
 import $ from 'jquery';
 import Autosuggest from 'react-autosuggest';
 
-// const getWikiSearchResults = (searchStr) => {};
 const getSuggestions = (value) => {};
-const getSuggestionValue = (suggestion) => {
-	suggestion;
-};
+
+// Tells Autosuggest what to do with suggestion value
+// const getSuggestionValue = (suggestion) => {
+// 	console.log('getSuggestionValue - suggestion: ', suggestion);
+// 	return suggestion;
+// };
+
+// Tells Autosuggest how to render suggestions
 const renderSuggestion = (suggestion) => {
-	console.log('renderSuggestion - suggestion: ', suggestion);
+	// console.log('renderSuggestion - suggestion: ', suggestion);
 	return <div className="renderSuggestionDiv">{suggestion}</div>;
 };
 
+/* Search class
+-----------------------------------------------------------*/
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,15 +31,18 @@ class Search extends React.Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.getSearchResults = this.getSearchResults.bind(this);
 	}
+	// Upon Autosuggest's onChange event => update value
 	onChange = (event, { newValue }) => {
 		this.setState({
 			value: newValue
 		});
 	};
+	// Automatically called with input change; Call Wikipedia API to get search suggestions => update suggestions array
 	onSuggestionsFetchRequested = ({ value }) => {
-		console.log('onSuggestionsFetchRequested() - value: ', value);
+		// console.log('onSuggestionsFetchRequested() - value: ', value);
 
 		let numSuggestions = 4;
 		let self = this;
@@ -47,7 +56,7 @@ class Search extends React.Component {
 				'&namespace=0&callback=?',
 			function(data) {
 				if (data) {
-					console.log('getSearchSuggestions() - data[1]: ', data[1]);
+					// console.log('getSearchSuggestions() - data[1]: ', data[1]);
 
 					if (typeof data[1] === 'undefined') {
 						return;
@@ -59,6 +68,7 @@ class Search extends React.Component {
 			}
 		);
 	};
+	// Automatically called to clear out suggestions array
 	onSuggestionsClearRequested = () => {
 		console.log('onSuggestionsClearRequested()');
 
@@ -66,6 +76,13 @@ class Search extends React.Component {
 			suggestions: []
 		});
 	};
+
+	// Tells Autosuggest what to do with suggestion value
+	handleSuggestion(suggestion) {
+		console.log('handleSuggestion - suggestion: ', suggestion);
+		this.getSearchResults(suggestion);
+		return suggestion;
+	}
 	getSearchResults = (suggestion) => {
 		console.log('getSearchResults() - suggestion: ', suggestion);
 
@@ -80,10 +97,9 @@ class Search extends React.Component {
 				'&namespace=0&callback=?',
 			function(data) {
 				console.log('getWikiSearchResults() - data[1]: ', data[1]);
-				// self.setState({
-				// 	searchResults: data[1]
-				// });
-				return data[1];
+				self.setState({
+					searchResults: data[1]
+				});
 			}
 		);
 	};
@@ -118,7 +134,7 @@ class Search extends React.Component {
 					suggestions={suggestions}
 					onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 					onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-					getSuggestionValue={getSuggestionValue}
+					getSuggestionValue={this.handleSuggestion}
 					renderSuggestion={renderSuggestion}
 					inputProps={inputProps}
 				/>

@@ -1,5 +1,8 @@
 .search-wrapper {
 	border: solid 1px orange;
+	display: flex;
+	flex-direction: row;
+	width: 30%;
 }
 .react-autosuggest__suggestions-list {
 	margin: 0;
