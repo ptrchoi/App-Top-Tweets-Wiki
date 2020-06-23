@@ -1,11 +1,14 @@
 import React from 'react';
 
 function Card(props) {
-	return (
-		<div className="card-wrapper">
-			<h5>Card Component</h5>
-		</div>
-	);
+	let { cards } = props;
+
+	let renderCards = () => {
+		return cards.map((el) => {
+			return <div className="card-wrapper">{el.text}</div>;
+		});
+	};
+	return <div className="cards-container">{renderCards()}</div>;
 }
 
 export default Card;

@@ -1,4 +1,15 @@
-.card-wrapper {
+.cards-container {
+	align-items: center;
 	border: solid 1px red;
-	margin: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.card-wrapper {
+	border: solid 2px black;
+	height: auto;
+	padding: 10px;
+	width: auto;
+	margin: 10px;
 }

@@ -1,4 +1,7 @@
 .inputs-wrapper {
+	align-items: center;
 	border: solid 3px black;
+	display: flex;
+	flex-direction: column;
 	padding: 20px;
 }
