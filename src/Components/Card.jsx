@@ -11,8 +11,8 @@ function Card(props) {
 	let renderCards = () => {
 		return cards.map((card) => {
 			return (
-				<div className="card-wrapper">
-					<img className="card-image" src={card.imgSrc} alt="" />
+				<div key={card.id} className="card-wrapper">
+					<img className="card-image" src={card.imgSrc} alt="title image" />
 					<h2>{card.title}</h2>
 					<p>{card.url}</p>
 					<a href={card.url} target="_blank" />

@@ -4,9 +4,10 @@ import Autosuggest from 'react-autosuggest';
 
 const TEMP_MAX = 4;
 
-/* API Calls/Functions
+/* Functions and API calls
 ---------------------------------------------------*/
-// Wikipedia API - get search suggestion results for typed input
+
+// Get search suggestion results for typed input from Wikipedia API
 function getWikiSuggstions(input) {
 	const wikiUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&suggest=true&format=json&search=' +
@@ -23,9 +24,9 @@ function getWikiSuggstions(input) {
 		});
 	});
 }
-function getSearchResults(searchStr) {
-	// console.log('getSearchResults - searchStr: ', searchStr);
 
+// Get search results for given string from Wikipedia API
+function getSearchResults(searchStr) {
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
@@ -42,9 +43,8 @@ function getSearchResults(searchStr) {
 	});
 }
 
+// Get image data related to given string from Wikipedia API
 function getWikiImg(str) {
-	// console.log('getWikiImg - str: ', str);
-
 	const wikiImgUrl =
 		'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original|thumbnail&pithumbsize=100&pilimit=1&titles=' +
 		str +
@@ -59,6 +59,7 @@ function getWikiImg(str) {
 	});
 }
 
+// Format image Data into a simple url
 function cleanUpImgData(imgData) {
 	let wikiStr = JSON.stringify(imgData);
 	let n = wikiStr.search('"original":');
@@ -70,33 +71,29 @@ function cleanUpImgData(imgData) {
 	if (n === -1) {
 		start = 0;
 	}
-
 	if (start <= 1) {
 		imageURL = '';
 	} else {
 		imageURL = wikiStr.substr(start, length);
 	}
-	// console.log('cleanUpImgData() - imageURL: ', imageURL);
 
 	return imageURL;
 }
 
-// Tells Autosuggest how to render suggestions
+// Tells Autosuggest how to render suggestions (ie. dropdown list)
 const renderSuggestion = (suggestion) => {
-	// console.log('renderSuggestion - suggestion: ', suggestion);
 	return <div className="renderSuggestionDiv">{suggestion}</div>;
 };
 
-/* Search class
------------------------------------------------------------*/
+/* Search Component
+---------------------------------------------------*/
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			value: '',
-			suggestions: [],
-			imgArr: []
+			suggestions: []
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -133,55 +130,42 @@ class Search extends React.Component {
 
 	// Automatically called by Autosuggest: Tells Autosuggest what to do with suggestion value
 	handleSuggestion = (suggestion) => {
-		// console.log('handleSuggestion - suggestion: ', suggestion);
 		this.suggestionToSearch(suggestion);
 
 		return suggestion;
 	};
 
-	//Intermediary step to step out of Autosuggest render method for updates
+	// Intermediary step to avoid warnings with Autosuggest render method updates
+	// Asynch API calls to collect and format data => updates data
 	suggestionToSearch = async (suggestion) => {
-		// console.log('suggestionToSearch - suggestion: ', suggestion);
 		const searchResults = await getSearchResults(suggestion);
-		// console.log('suggestionToSearch - searchResults: ', searchResults);
 		const wikiData = await this.getWikiData(searchResults);
-		// console.log('suggestionToSearch - wikiData: ', wikiData);
 
 		this.updateContent(wikiData);
 	};
 
+	// Get image data from Wikipedia API, format and set all wiki data into a new array
 	getWikiData = async (data) => {
 		let tempArr = [];
 
 		for (let i = 0; i < data.length; i++) {
-			// Get the "title" & url of each result
-			let currentTitle = data[1][i];
-			let currentUrl = data[3][i];
-			// console.log('getWikiData() - for loop "i": ', i, ' "currentTitle": ', currentTitle);
-			// console.log('data: ', data);
-
 			let wikiDataObj = {
 				id: 'card' + i,
-				title: currentTitle,
+				title: data[1][i],
 				imgSrc: '',
 				text: 'text goes here',
-				url: currentUrl
+				url: data[3][i]
 			};
 
-			// Search Wikipedia for images related to the title
-			const imgData = await getWikiImg(currentTitle);
-
-			// Format image source data into simple url and add to obj props
+			const imgData = await getWikiImg(data[1][i]);
 			wikiDataObj.imgSrc = cleanUpImgData(imgData);
-
-			// Add the updated obj to the arr
 			tempArr[i] = wikiDataObj;
 		}
-		// console.log('getWikiData() - tempArr: ', tempArr);
 		return tempArr;
 	};
 
 	updateContent(contentArr) {
+		// Callback to <Inputs> parent component
 		this.props.onSearch(contentArr);
 	}
 	render() {
