@@ -2,7 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import Autosuggest from 'react-autosuggest';
 
-const getSuggestions = (value) => {};
+const TEMP_MAX = 4;
+
+// const getSuggestions = (value) => {};
 
 // Tells Autosuggest what to do with suggestion value
 // const getSuggestionValue = (suggestion) => {
@@ -10,6 +12,67 @@ const getSuggestions = (value) => {};
 // 	return suggestion;
 // };
 
+/* API Calls/Functions
+---------------------------------------------------*/
+// Wikipedia API - get search suggestion results for typed input
+function getWikiSuggstions(input) {
+	const wikiUrl =
+		'https://en.wikipedia.org/w/api.php?action=opensearch&suggest=true&format=json&search=' +
+		input +
+		'&limit=' +
+		TEMP_MAX +
+		'&namespace=0&callback=?';
+
+	return new Promise((resolve, reject) => {
+		$.getJSON({
+			url: wikiUrl,
+			success: resolve,
+			error: reject
+		});
+	});
+}
+// ,
+// function(data) {
+// 	if (data) {
+// 		// console.log('getSearchSuggestions() - data[1]: ', data[1]);
+
+// 		if (typeof data[1] === 'undefined') {
+// 			return;
+// 		}
+// 		self.setState({
+// 			suggestions: data[1]
+// 		});
+// 	}
+// }
+
+const getWikiImg = (str, callback) => {
+	// Call Wikipedia API with title search for images
+	$.getJSON(
+		'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original|thumbnail&pithumbsize=100&pilimit=1&titles=' +
+			str +
+			'&callback=?',
+		function(data) {
+			let wikiStr = JSON.stringify(data);
+			let n = wikiStr.search('"original":');
+			let start = wikiStr.indexOf('"http') + 1;
+			let end = wikiStr.indexOf('"', start);
+			let length = end - start;
+			let imageURL = '';
+
+			if (n === -1) {
+				start = 0;
+			}
+
+			if (start <= 1) {
+				imageURL = '';
+			} else {
+				imageURL = wikiStr.substr(start, length);
+			}
+			console.log('getWikiImage() - imageURL: ', imageURL);
+			callback(imageURL);
+		}
+	);
+};
 // Tells Autosuggest how to render suggestions
 const renderSuggestion = (suggestion) => {
 	// console.log('renderSuggestion - suggestion: ', suggestion);
@@ -25,8 +88,7 @@ class Search extends React.Component {
 		this.state = {
 			value: '',
 			suggestions: [],
-			searchResults: [],
-			contentArray: []
+			imgArr: []
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -34,7 +96,9 @@ class Search extends React.Component {
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.getSearchResults = this.getSearchResults.bind(this);
-		this.setWikiCards = this.setWikiCards.bind(this);
+		this.setCardContent = this.setCardContent.bind(this);
+		this.getWikiImages = this.getWikiImages.bind(this);
+		this.updateContent = this.updateContent.bind(this);
 	}
 	// Upon Autosuggest's onChange event => update value
 	onChange = (event, { newValue }) => {
@@ -43,36 +107,18 @@ class Search extends React.Component {
 		});
 	};
 	// Automatically called with input change; Call Wikipedia API to get search suggestions => update suggestions array
-	onSuggestionsFetchRequested = ({ value }) => {
+	onSuggestionsFetchRequested = async ({ value }) => {
 		// console.log('onSuggestionsFetchRequested() - value: ', value);
+		const suggestions = await getWikiSuggstions(value);
 
-		let numSuggestions = 4;
-		let self = this;
-
-		// Call Wikipedia API search with value for suggestions
-		$.getJSON(
-			'https://en.wikipedia.org/w/api.php?action=opensearch&suggest=true&format=json&search=' +
-				value +
-				'&limit=' +
-				numSuggestions +
-				'&namespace=0&callback=?',
-			function(data) {
-				if (data) {
-					// console.log('getSearchSuggestions() - data[1]: ', data[1]);
-
-					if (typeof data[1] === 'undefined') {
-						return;
-					}
-					self.setState({
-						suggestions: data[1]
-					});
-				}
-			}
-		);
+		this.setState({
+			suggestions: suggestions[1]
+		});
 	};
+
 	// Automatically called to clear out suggestions array
 	onSuggestionsClearRequested = () => {
-		console.log('onSuggestionsClearRequested()');
+		// console.log('onSuggestionsClearRequested()');
 
 		this.setState({
 			suggestions: []
@@ -81,16 +127,15 @@ class Search extends React.Component {
 
 	// Tells Autosuggest what to do with suggestion value
 	handleSuggestion(suggestion) {
-		console.log('handleSuggestion - suggestion: ', suggestion);
+		// console.log('handleSuggestion - suggestion: ', suggestion);
 		this.getSearchResults(suggestion);
 		return suggestion;
 	}
 
-	// Calls Wikipedia API with suggestion => call setWikiCards with updated data array
+	// Calls Wikipedia API with suggestion => call setCardContent with updated data array
 	getSearchResults = (suggestion) => {
-		console.log('getSearchResults() - suggestion: ', suggestion);
+		// console.log('getSearchResults() - suggestion: ', suggestion);
 
-		const TEMP_MAX = 4;
 		let self = this;
 
 		$.getJSON(
@@ -100,7 +145,7 @@ class Search extends React.Component {
 				TEMP_MAX +
 				'&namespace=0&callback=?',
 			function(data) {
-				// console.log('getWikiSearchResults() - data: ', data);
+				console.log('getSearchResults() - data: ', data);
 				// self.setState({
 				// 	searchResults: data[1]
 				// });
@@ -111,43 +156,67 @@ class Search extends React.Component {
 				// for (let i = 0; i < TEMP_MAX; i++) {
 				// 	myArr[i] = data[1][i];
 				// }
-				// self.setWikiCards(myArr);
-				self.setWikiCards(data);
+				// self.setCardContent(myArr);
+				// self.setCardContent(data);
+				self.getWikiImages(data);
 			}
 		);
 	};
 
-	setWikiCards(thisArr) {
-		let { contentArray } = this.state;
+	getWikiImages = (wikiData) => {
+		let myArr = [];
 
-		console.log('setWikiCards() thisArr: ', thisArr);
-		for (let i = 0; i < thisArr.length; i++) {
-			if (!thisArr[i]) {
-				$('#wikiCard0' + i).hide();
-			} else {
-				console.log('setWikiCards() loop to display thisArr[i]: ', thisArr[i]);
+		for (let i = 0; i < wikiData.length; i++) {
+			console.log('getWikiImages() - for loop "i": ', i);
+			console.log('getWikiImages() - for loop "wikiData[1][i]": ', wikiData[1][i]);
 
-				let tempContentObj = {
-					id: 'card' + i,
-					imgSrc: '',
-					title: thisArr[1][i],
-					text: 'text goes here',
-					url: thisArr[3][i]
-				};
-				// Append current obj's id with index #
-				contentArray[i] = tempContentObj;
-				// displayWikiCards(thisArr, i);
-				// $('#wikiCard0' + i).show();
-				// document.getElementById('img0' + i).setAttribute('alt', 'loading image...');
-				// getImages(thisArr, i);
-			}
+			// Get the "title" of each result
+			let tempImgObj = {
+				title: wikiData[1][i],
+				imgSrc: ''
+			};
+
+			// Passes in a callback as the 2nd parameter, operating on the returned image url
+			getWikiImg(wikiData[1][i], (imgUrl) => {
+				console.log('inside CALLBACK,imgUrl: ', imgUrl);
+				tempImgObj.imgSrc = imgUrl;
+				myArr[i] = tempImgObj;
+			});
 		}
-		// this.setState({
-		// 	contentArray: contentArray
-		// });
-		this.props.onSearch(contentArray);
-	}
+		console.log('getWikiImages() - myArr: ', myArr);
+		this.setState({
+			imgArr: myArr
+		});
+		this.setCardContent(wikiData);
+	};
 
+	setCardContent = (data) => {
+		let contentArray = [];
+		let { imgArr } = this.state;
+
+		console.log('setCardContent() imgArr: ', imgArr);
+		console.log('setCardContent() data: ', data);
+		for (let i = 0; i < data.length; i++) {
+			console.log('setCardContent() loop to display imgArr[i]: ', imgArr[i]);
+			// console.log('setCardContent() loop to display imgArr[i].imgSrc: ', imgArr[i].imgSrc);
+			// console.log('setCardContent() loop to display data[1][i]: ', data[1][i]);
+
+			let tempContentObj = {
+				id: 'card' + i,
+				title: data[1][i],
+				imgSrc: imgArr[i].imgSrc,
+				text: 'text goes here',
+				url: data[3][i]
+			};
+
+			contentArray[i] = tempContentObj;
+		}
+		this.updateContent(contentArray);
+	};
+
+	updateContent(contentArr) {
+		this.props.onSearch(contentArr);
+	}
 	render() {
 		let { value, suggestions } = this.state;
 		const inputProps = {
