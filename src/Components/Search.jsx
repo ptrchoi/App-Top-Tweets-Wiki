@@ -104,20 +104,18 @@ class Search extends React.Component {
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.suggestionToSearch = this.suggestionToSearch.bind(this);
-		// this.getSearchResults = this.getSearchResults.bind(this);
-		this.setCardContent = this.setCardContent.bind(this);
-		this.getWikiImages = this.getWikiImages.bind(this);
+		this.getWikiData = this.getWikiData.bind(this);
 		this.updateContent = this.updateContent.bind(this);
 	}
 
-	// Upon Autosuggest's onChange event => update input string value
+	// Automatically called by Autosuggest's onChange event
 	onChange = (event, { newValue }) => {
 		this.setState({
 			value: newValue
 		});
 	};
 
-	// Automatically called with input change
+	// Automatically called by Autosuggest's input event
 	onSuggestionsFetchRequested = async ({ value }) => {
 		const suggestions = await getWikiSuggstions(value);
 
@@ -126,7 +124,7 @@ class Search extends React.Component {
 		});
 	};
 
-	// Automatically called to clear out suggestions array
+	// Automatically called by Autosuggest's input clear event
 	onSuggestionsClearRequested = () => {
 		this.setState({
 			suggestions: []
@@ -135,76 +133,52 @@ class Search extends React.Component {
 
 	// Automatically called by Autosuggest: Tells Autosuggest what to do with suggestion value
 	handleSuggestion = (suggestion) => {
-		console.log('handleSuggestion - suggestion: ', suggestion);
+		// console.log('handleSuggestion - suggestion: ', suggestion);
 		this.suggestionToSearch(suggestion);
 
 		return suggestion;
 	};
 
-	//Intermediary step to step out of Autosuggest methods
+	//Intermediary step to step out of Autosuggest render method for updates
 	suggestionToSearch = async (suggestion) => {
-		console.log('suggestionToSearch - suggestion: ', suggestion);
-		const results = await getSearchResults(suggestion);
-		console.log('suggestionToSearch - results: ', results);
-		const searchArr = await this.getWikiImages(results);
-		console.log('suggestionToSearch - updatedData: ', searchArr);
+		// console.log('suggestionToSearch - suggestion: ', suggestion);
+		const searchResults = await getSearchResults(suggestion);
+		// console.log('suggestionToSearch - searchResults: ', searchResults);
+		const wikiData = await this.getWikiData(searchResults);
+		// console.log('suggestionToSearch - wikiData: ', wikiData);
 
-		this.setCardContent(searchArr);
+		this.updateContent(wikiData);
 	};
 
-	getWikiImages = async (wikiData) => {
+	getWikiData = async (data) => {
 		let tempArr = [];
 
-		for (let i = 0; i < wikiData.length; i++) {
-			// Get the "title" of each result
-			let currentTitle = wikiData[1][i];
-			let currentUrl = wikiData[3][i];
-			console.log('getWikiImages() - for loop "i": ', i, ' "currentTitle": ', currentTitle);
-			console.log('wikiData: ', wikiData);
+		for (let i = 0; i < data.length; i++) {
+			// Get the "title" & url of each result
+			let currentTitle = data[1][i];
+			let currentUrl = data[3][i];
+			// console.log('getWikiData() - for loop "i": ', i, ' "currentTitle": ', currentTitle);
+			// console.log('data: ', data);
 
-			let tempImgObj = {
+			let wikiDataObj = {
+				id: 'card' + i,
 				title: currentTitle,
-				url: currentUrl,
-				imgSrc: ''
+				imgSrc: '',
+				text: 'text goes here',
+				url: currentUrl
 			};
 
-			const imgSrc = await getWikiImg(currentTitle);
+			// Search Wikipedia for images related to the title
+			const imgData = await getWikiImg(currentTitle);
 
-			let cleanedImgSrc = cleanUpImgData(imgSrc);
-			console.log('getWikiImage - imgSrc: ', cleanedImgSrc);
-			tempImgObj.imgSrc = cleanedImgSrc;
-			tempArr[i] = tempImgObj;
+			// Format image source data into simple url and add to obj props
+			wikiDataObj.imgSrc = cleanUpImgData(imgData);
+
+			// Add the updated obj to the arr
+			tempArr[i] = wikiDataObj;
 		}
-		console.log('getWikiImages() - tempArr: ', tempArr);
-		// this.setState({
-		// 	imgArr: tempArr
-		// });
-		// this.setCardContent(wikiData);
+		// console.log('getWikiData() - tempArr: ', tempArr);
 		return tempArr;
-	};
-
-	setCardContent = (data) => {
-		// let contentArray = [];
-		// let { imgArr } = this.state;
-
-		// console.log('setCardContent() imgArr: ', imgArr);
-		console.log('setCardContent() data: ', data);
-		// for (let i = 0; i < data.length; i++) {
-		// // 	console.log('setCardContent() loop to display imgArr[i]: ', imgArr[i]);
-		// 	// console.log('setCardContent() loop to display imgArr[i].imgSrc: ', imgArr[i].imgSrc);
-		// 	// console.log('setCardContent() loop to display data[1][i]: ', data[1][i]);
-
-		// 	let tempContentObj = {
-		// 		id: 'card' + i,
-		// 		title: data[1][i],
-		// 		imgSrc: imgArr[i].imgSrc,
-		// 		text: 'text goes here',
-		// 		url: data[3][i]
-		// 	};
-
-		// 	contentArray[i] = tempContentObj;
-		// }
-		// this.updateContent(contentArray);
 	};
 
 	updateContent(contentArr) {
