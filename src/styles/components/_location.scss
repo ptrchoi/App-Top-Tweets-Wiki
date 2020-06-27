@@ -1,3 +1,38 @@
 .location-wrapper {
+	align-items: center;
 	border: solid 1px orange;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.flag-wrapper {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+}
+.flag-image {
+	margin: .5em;
+	height: 32px;
+	width: 32px;
+}
+.flag-label {
+}
+/* HIDE RADIO */
+[type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+/* IMAGE STYLES */
+[type=radio] + img {
+	cursor: pointer;
+}
+/* CHECKED STYLES */
+[type=radio]:checked + label > img {
+	height: 50px;
+	width: 50px;
+	border: solid 3px #38a1f3;
+	border-radius: 60px;
+	box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.5), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
 }

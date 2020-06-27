@@ -187,6 +187,7 @@ class Search extends React.Component {
 					onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 					onSuggestionsClearRequested={this.onSuggestionsClearRequested}
 					getSuggestionValue={this.handleSuggestion}
+					highlightFirstSuggestion={true}
 					renderSuggestion={renderSuggestion}
 					inputProps={inputProps}
 				/>
