@@ -58,8 +58,11 @@ class App extends React.Component {
 	}
 	// Pass content updates from Inputs>Search comp to CardGrid comp
 	handleSearchUpdate(contentArr) {
-		console.log('App.jsx - handleSearchUpdate() - arr: ', contentArr);
+		// console.log('App.jsx - handleSearchUpdate() - arr: ', contentArr);
+		// console.log('App.jsx - handleSearchUpdate() - cardCount: ', contentArr.length);
+
 		this.setState({
+			cardCount: contentArr.length,
 			cardContent: contentArr
 		});
 	}

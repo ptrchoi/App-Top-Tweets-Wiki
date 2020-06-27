@@ -2,18 +2,19 @@ import React from 'react';
 import $ from 'jquery';
 import Autosuggest from 'react-autosuggest';
 
-const TEMP_MAX = 4;
+const MAX_CARDS = 9;
+const MAX_SUGGESTIONS = 5;
 
 /* Functions and API calls
 ---------------------------------------------------*/
 
 // Get search suggestion results for typed input from Wikipedia API
-function getWikiSuggstions(input) {
+function getWikiSuggestions(input) {
 	const wikiUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&suggest=true&format=json&search=' +
 		input +
 		'&limit=' +
-		TEMP_MAX +
+		MAX_SUGGESTIONS +
 		'&namespace=0&callback=?';
 
 	return new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ function getSearchResults(searchStr) {
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
 		'&limit=' +
-		TEMP_MAX +
+		MAX_CARDS +
 		'&namespace=0&callback=?';
 
 	return new Promise((resolve, reject) => {
@@ -114,7 +115,7 @@ class Search extends React.Component {
 
 	// Automatically called by Autosuggest's input event
 	onSuggestionsFetchRequested = async ({ value }) => {
-		const suggestions = await getWikiSuggstions(value);
+		const suggestions = await getWikiSuggestions(value);
 
 		this.setState({
 			suggestions: suggestions[1]
@@ -148,7 +149,8 @@ class Search extends React.Component {
 	getWikiData = async (data) => {
 		let tempArr = [];
 
-		for (let i = 0; i < data.length; i++) {
+		// data[1] is the index for the resulting search titles
+		for (let i = 0; i < data[1].length; i++) {
 			let wikiDataObj = {
 				id: 'card' + i,
 				title: data[1][i],
