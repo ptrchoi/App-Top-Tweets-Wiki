@@ -8,8 +8,8 @@ import Search from './Search';
 function Inputs(props) {
 	return (
 		<div className="inputs-wrapper">
-			<WikiTweets />
-			<Location />
+			<WikiTweets location={props.location} onTweetSearch={props.onTweetSearch} />
+			<Location onLocation={props.onLocation} />
 			<Search onSearch={props.onSearch} />
 		</div>
 	);

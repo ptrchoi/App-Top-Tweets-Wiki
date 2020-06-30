@@ -19,6 +19,16 @@ class Location extends React.Component {
 		this.state = {
 			selectedOption: '1'
 		};
+
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange(e) {
+		let selectedLocation = e.target.value;
+
+		this.props.onLocation(selectedLocation);
+		this.setState({
+			selectedOption: selectedLocation
+		});
 	}
 
 	render() {
@@ -32,12 +42,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="1"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '1'}
 				/>
-				<label for="input1" className="flag-wrapper">
+				<label htmlFor="input1" className="flag-wrapper">
 					<img className="flag-image" src={imgGLO} />
 					Global
 				</label>
@@ -46,12 +54,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="2487956"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '2487956'}
 				/>
-				<label for="input2" className="flag-wrapper">
+				<label htmlFor="input2" className="flag-wrapper">
 					<img className="flag-image" src={imgUS} />
 					S.F, CA
 				</label>
@@ -60,12 +66,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="2357024"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '2357024'}
 				/>
-				<label for="input3" className="flag-wrapper">
+				<label htmlFor="input3" className="flag-wrapper">
 					<img className="flag-image" src={imgUS} />
 					Atlanta, GA
 				</label>
@@ -74,12 +78,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="2459115"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '2459115'}
 				/>
-				<label for="input4" className="flag-wrapper">
+				<label htmlFor="input4" className="flag-wrapper">
 					<img className="flag-image" src={imgUS} />
 					N.Y., NY
 				</label>
@@ -88,12 +90,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="9807"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '9807'}
 				/>
-				<label for="input5" className="flag-wrapper">
+				<label htmlFor="input5" className="flag-wrapper">
 					<img className="flag-image" src={imgCA} />
 					Vancouver, CA
 				</label>
@@ -102,12 +102,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="116545"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '116545'}
 				/>
-				<label for="input6" className="flag-wrapper">
+				<label htmlFor="input6" className="flag-wrapper">
 					<img className="flag-image" src={imgMX} />
 					Mexico City, MX
 				</label>
@@ -116,12 +114,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="455825"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '455825'}
 				/>
-				<label for="input7" className="flag-wrapper">
+				<label htmlFor="input7" className="flag-wrapper">
 					<img className="flag-image" src={imgBR} />
 					Rio de Janeiro, BR
 				</label>
@@ -130,12 +126,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="44418"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '44418'}
 				/>
-				<label for="input8" className="flag-wrapper">
+				<label htmlFor="input8" className="flag-wrapper">
 					<img className="flag-image" src={imgGB} />
 					London, GB
 				</label>
@@ -144,12 +138,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="638242"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '638242'}
 				/>
-				<label for="input9" className="flag-wrapper">
+				<label htmlFor="input9" className="flag-wrapper">
 					<img className="flag-image" src={imgDE} />
 					Berlin, DE
 				</label>
@@ -158,12 +150,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="766273"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '766273'}
 				/>
-				<label for="input10" className="flag-wrapper">
+				<label htmlFor="input10" className="flag-wrapper">
 					<img className="flag-image" src={imgES} />
 					Madrid, ES
 				</label>
@@ -172,12 +162,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="615702"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '615702'}
 				/>
-				<label for="input11" className="flag-wrapper">
+				<label htmlFor="input11" className="flag-wrapper">
 					<img className="flag-image" src={imgFR} />
 					Paris, FR
 				</label>
@@ -186,12 +174,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="721943"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '721943'}
 				/>
-				<label for="input12" className="flag-wrapper">
+				<label htmlFor="input12" className="flag-wrapper">
 					<img className="flag-image" src={imgIT} />
 					Rome, IT
 				</label>
@@ -200,12 +186,10 @@ class Location extends React.Component {
 					type="radio"
 					name="country"
 					value="1105779"
-					onChange={(e) => {
-						this.setState({ selectedOption: e.target.value });
-					}}
+					onChange={this.handleChange}
 					checked={selectedOption === '1105779'}
 				/>
-				<label for="input13" className="flag-wrapper">
+				<label htmlFor="input13" className="flag-wrapper">
 					<img className="flag-image" src={imgAU} />
 					Sydney, AU
 				</label>

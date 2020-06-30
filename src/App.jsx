@@ -47,14 +47,21 @@ class App extends React.Component {
 
 		this.state = {
 			cardCount: 4,
-			cardContent: []
+			cardContent: [],
+			location: 1 // WOEID
 		};
 
+		this.handleTweetSearch = this.handleTweetSearch.bind(this);
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
+		this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
 	}
 	// Initialize card content upon Mounting
 	componentDidMount() {
 		this.handleSearchUpdate(testArray);
+		// this.handleLocationUpdate();
+	}
+	handleTweetSearch(msg) {
+		console.log('App.jsx - handleTweetSearch() - msg: ', msg);
 	}
 	// Pass content updates from Inputs>Search comp to CardGrid comp
 	handleSearchUpdate(contentArr) {
@@ -66,12 +73,25 @@ class App extends React.Component {
 			cardContent: contentArr
 		});
 	}
+	// Pass WOEID from location to Twitter API
+	handleLocationUpdate(location) {
+		console.log('App.jsx - handleLocationUpdate() - location code: ', location);
+
+		this.setState({
+			location: location
+		});
+	}
 	render() {
-		const { cardCount, cardContent } = this.state;
+		const { cardCount, cardContent, location } = this.state;
 		return (
 			<div className="app-container">
 				<Header />
-				<Inputs onSearch={this.handleSearchUpdate} />
+				<Inputs
+					onTweetSearch={this.handleTweetSearch}
+					location={location}
+					onLocation={this.handleLocationUpdate}
+					onSearch={this.handleSearchUpdate}
+				/>
 				<CardGrid cardCount={cardCount} cardContent={cardContent} />
 			</div>
 		);
