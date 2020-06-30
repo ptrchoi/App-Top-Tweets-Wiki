@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Location from './Location';
+
 /* Functions
 ------------------------------------------------------*/
 // The splice() method changes the content of a string by removing a range of characters and/or adding new characters.
@@ -81,14 +83,27 @@ class WikiTweets extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			locationID: 1
+		};
+
 		this.handleClick = this.handleClick.bind(this);
+		this.handleLocSelection = this.handleLocSelection.bind(this);
 		this.getData = this.getData.bind(this);
 	}
 
-	handleClick(e, locationID) {
+	handleClick(e) {
 		e.preventDefault();
 
-		this.getData(locationID);
+		console.log('WikiTweets.jsx - handleClick() - this.state.locationID: ', this.state.locationID);
+		this.getData(this.state.locationID);
+	}
+	handleLocSelection(locationID) {
+		console.log('WikiTweets.jsx - handleLocSelection() - locationID: ', locationID);
+
+		this.setState({
+			locationID: locationID
+		});
 	}
 	// ASYNC - Intermediary step since handleClick has to be a function and not an object
 	getData = async (locationID) => {
@@ -101,14 +116,10 @@ class WikiTweets extends React.Component {
 	render(props) {
 		return (
 			<div className="wiki-tweets-wrapper">
-				<button
-					id="twitterButton"
-					onClick={(e) => {
-						this.handleClick(e, this.props.locationID);
-					}}
-				>
+				<button id="twitterButton" onClick={this.handleClick}>
 					Get Wikipedia results for Top Trending Tweets
 				</button>
+				<Location onLocSelection={this.handleLocSelection} />
 			</div>
 		);
 	}

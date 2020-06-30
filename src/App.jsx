@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 
 // Components
 import Header from './Components/Header';
-// import Inputs from './Components/Inputs';
 import WikiTweets from './Components/WikiTweets';
-import Location from './Components/Location';
 import Search from './Components/Search';
 import CardGrid from './Components/CardGrid';
 
@@ -50,13 +48,11 @@ class App extends React.Component {
 
 		this.state = {
 			cardCount: 4,
-			cardContent: [],
-			locationID: 1 // WOEID
+			cardContent: []
 		};
 
 		this.handleTweetSearch = this.handleTweetSearch.bind(this);
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
-		this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
 	}
 	// Initialize card content upon Mounting
 	componentDidMount() {
@@ -76,14 +72,6 @@ class App extends React.Component {
 			cardContent: contentArr
 		});
 	}
-	// Pass WOEID from location to Twitter API
-	handleLocationUpdate(locationID) {
-		console.log('App.jsx - handleLocationUpdate() - locationID: ', locationID);
-
-		this.setState({
-			locationID: locationID
-		});
-	}
 	render() {
 		const { cardCount, cardContent, locationID } = this.state;
 		return (
@@ -91,7 +79,6 @@ class App extends React.Component {
 				<Header />
 				<div className="inputs-wrapper">
 					<WikiTweets locationID={locationID} onTweetSearch={this.handleTweetSearch} />
-					<Location onLocation={this.handleLocationUpdate} />
 					<Search onSearch={this.handleSearchUpdate} />
 				</div>
 				<CardGrid cardCount={cardCount} cardContent={cardContent} />

@@ -25,7 +25,7 @@ class Location extends React.Component {
 	handleChange(e) {
 		let selectedLocation = e.target.value;
 
-		this.props.onLocation(selectedLocation);
+		this.props.onLocSelection(selectedLocation);
 		this.setState({
 			selectedOption: selectedLocation
 		});
