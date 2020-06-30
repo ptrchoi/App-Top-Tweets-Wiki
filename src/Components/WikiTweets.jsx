@@ -11,10 +11,7 @@ if (!String.prototype.splice) {
 
 // Get top 50 trending tweets by locationID
 function getTrendingOnTwitter(locationID) {
-	console.log('inside getTrendingOnTwitter() - locationID: ', locationID);
-
 	if (isNaN(locationID) || locationID <= 0) {
-		// console.log('isNaN(locationID) ERROR: ', isNaN(locationID));
 		locationID = 1;
 	}
 
@@ -34,7 +31,6 @@ function getTrendingOnTwitter(locationID) {
 			},
 			function(err, resp, data) {
 				if (err) {
-					console.log('Promise err: ', err);
 					reject(err);
 				}
 				resolve(data);
@@ -56,8 +52,6 @@ function parseTwitterData(data) {
 			titleOnly = titleOnly.slice(1);
 		}
 
-		// console.log('BEFORE fixing - titleOnly: ', titleOnly, 'titleOnly.length: ', titleOnly.length);
-
 		// Add spaces for mixed case
 		for (let k = 0; k < titleOnly.length - 1; k++) {
 			let char = titleOnly[k];
@@ -71,9 +65,6 @@ function parseTwitterData(data) {
 				englishCharset.test(nextChar) &&
 				(char === char.toLowerCase() && nextChar === nextChar.toUpperCase())
 			) {
-				// console.log('FOUND: char: ', char);
-				// console.log('       nextChar: ', nextChar);
-
 				String.prototype.splice = function(idx, rem, str) {
 					return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
 				};
@@ -81,9 +72,6 @@ function parseTwitterData(data) {
 				titleOnly = titleOnly.splice(k + 1, 0, ' ');
 			}
 		}
-
-		console.log('AFTER fixing - titleOnly: ', titleOnly);
-
 		cleanedData[i] = titleOnly;
 	}
 	return cleanedData;
@@ -100,22 +88,17 @@ class WikiTweets extends React.Component {
 	handleClick(e, locationID) {
 		e.preventDefault();
 
-		console.log('twitterButton - clicked!');
-		// this.props.onTweetSearch('button clicked');
-
 		this.getData(locationID);
 	}
-	// Intermediary step since handleClick has to be a function and not an object
+	// ASYNC - Intermediary step since handleClick has to be a function and not an object
 	getData = async (locationID) => {
-		console.log('inside getData async - locationID: ', locationID);
-
 		const twitData = await getTrendingOnTwitter(locationID);
 		let tweets = parseTwitterData(twitData);
-		console.log('getData > tweets: ', tweets);
+		// console.log('tweets: ', tweets);
+		this.props.onTweetSearch(tweets);
 	};
 
 	render(props) {
-		console.log('WikiTweets - props.locationID: ', this.props.locationID);
 		return (
 			<div className="wiki-tweets-wrapper">
 				<button
