@@ -8,7 +8,7 @@ import Search from './Search';
 function Inputs(props) {
 	return (
 		<div className="inputs-wrapper">
-			<WikiTweets location={props.location} onTweetSearch={props.onTweetSearch} />
+			<WikiTweets locationID={props.locationID} onTweetSearch={props.onTweetSearch} />
 			<Location onLocation={props.onLocation} />
 			<Search onSearch={props.onSearch} />
 		</div>

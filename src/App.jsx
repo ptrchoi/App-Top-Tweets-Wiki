@@ -48,7 +48,7 @@ class App extends React.Component {
 		this.state = {
 			cardCount: 4,
 			cardContent: [],
-			location: 1 // WOEID
+			locationID: 1 // WOEID
 		};
 
 		this.handleTweetSearch = this.handleTweetSearch.bind(this);
@@ -74,21 +74,21 @@ class App extends React.Component {
 		});
 	}
 	// Pass WOEID from location to Twitter API
-	handleLocationUpdate(location) {
-		console.log('App.jsx - handleLocationUpdate() - location code: ', location);
+	handleLocationUpdate(locationID) {
+		console.log('App.jsx - handleLocationUpdate() - locationID: ', locationID);
 
 		this.setState({
-			location: location
+			locationID: locationID
 		});
 	}
 	render() {
-		const { cardCount, cardContent, location } = this.state;
+		const { cardCount, cardContent, locationID } = this.state;
 		return (
 			<div className="app-container">
 				<Header />
 				<Inputs
 					onTweetSearch={this.handleTweetSearch}
-					location={location}
+					locationID={locationID}
 					onLocation={this.handleLocationUpdate}
 					onSearch={this.handleSearchUpdate}
 				/>
