@@ -186,15 +186,19 @@ class Search extends React.Component {
 
 		// data[1] is the index for the resulting search titles
 		for (let i = 0; i < data[1].length; i++) {
+			let title = data[1][i];
+
 			let wikiDataObj = {
 				id: uuidv4(),
-				title: data[1][i],
+				title: title,
 				imgSrc: '',
 				text: 'text goes here',
 				url: data[3][i]
 			};
 
-			const imgData = await getWikiImg(data[1][i]);
+			// console.log('wikiDataObj: ', wikiDataObj);
+
+			const imgData = await getWikiImg(title);
 			wikiDataObj.imgSrc = cleanUpImgData(imgData);
 			tempArr[i] = wikiDataObj;
 		}

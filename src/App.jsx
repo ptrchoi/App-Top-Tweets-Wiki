@@ -16,27 +16,7 @@ const cardImg = require('./images/cardImage.png');
 const testArray = [
 	{
 		id: 0,
-		title: 'card #1 from App.jsx',
-		imgSrc: cardImg
-	},
-	{
-		id: 1,
-		title: 'card #2 from App.jsx',
-		imgSrc: cardImg
-	},
-	{
-		id: 2,
-		title: 'card #3 from App.jsx',
-		imgSrc: cardImg
-	},
-	{
-		id: 3,
-		title: 'card #4 from App.jsx',
-		imgSrc: cardImg
-	},
-	{
-		id: 4,
-		title: 'card #5 from App.jsx',
+		title: 'Get Wikis...',
 		imgSrc: cardImg
 	}
 ];

@@ -10,7 +10,6 @@ function CardGrid(props) {
 	// console.log('cardCount: ', cardCount);
 	return (
 		<div className="cardgrid-wrapper">
-			<h1>Card Grid Component</h1>
 			<Card cards={cardContent} />
 		</div>
 	);
