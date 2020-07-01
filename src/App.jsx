@@ -68,7 +68,7 @@ class App extends React.Component {
 		});
 	}
 	render() {
-		const { cardCount, cardContent, locationID } = this.state;
+		const { cardCount, cardContent } = this.state;
 		return (
 			<div className="app-container">
 				<Header />

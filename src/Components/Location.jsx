@@ -33,7 +33,7 @@ class Location extends React.Component {
 
 	render() {
 		let { selectedOption } = this.state;
-		console.log('selectedOption: ', selectedOption);
+		// console.log('selectedOption: ', selectedOption);
 
 		return (
 			<div className="location-wrapper">

@@ -28,8 +28,8 @@ function getWikiSuggestions(input) {
 	});
 }
 
-// Get search results for given string from Wikipedia API
-function getSearchResults(searchStr, numOfResults) {
+// Get search results from Wikipedia API for given string
+function getSearchResults(searchStr, numOfResults = 1) {
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
@@ -104,10 +104,11 @@ class Search extends React.Component {
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.suggestionToSearch = this.suggestionToSearch.bind(this);
-		this.getWikiData = this.getWikiData.bind(this);
-		this.updateContent = this.updateContent.bind(this);
 		this.handleTweetSearch = this.handleTweetSearch.bind(this);
 		this.getTwitterResults = this.getTwitterResults.bind(this);
+		this.getWikiData = this.getWikiData.bind(this);
+		this.updateContent = this.updateContent.bind(this);
+		this.clearContent = this.clearContent.bind(this);
 	}
 
 	// Automatically called by Autosuggest's onChange event
@@ -143,6 +144,7 @@ class Search extends React.Component {
 	// Intermediary step to avoid warnings with Autosuggest render method updates
 	// Asynch API calls to collect and format data => updates data
 	suggestionToSearch = async (suggestion) => {
+		this.clearContent();
 		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
 		// console.log('suggestionToSearch - searchResults: ', searchResults);
 		const wikiData = await this.getWikiData(searchResults);
@@ -150,22 +152,24 @@ class Search extends React.Component {
 		this.updateContent(wikiData);
 	};
 
+	handleTweetSearch(tweetsArr) {
+		this.clearContent();
+		let wikiTweetsForCards = this.getTwitterResults(tweetsArr);
+	}
+
 	getTwitterResults = async (tweetsArr) => {
 		let wikiDataForTweets = [];
 
 		// Search for wiki results for each tweet in the tweetsArr
-		// console.log('tweetsArr: ', tweetsArr);
-		// for (let j = 0; j < 10; j++) {
 		for (let j = 0; j < tweetsArr.length; j++) {
 			const searchResult = await getSearchResults(tweetsArr[j], 1);
-			// console.log('getTwitterResults - searchResult: ', searchResult);
-			// console.log('getTwitterResults - searchResult[3]: ', searchResult[3]);
+
+			// Check if there are any Wikipedia results for the title.
+			// If so, get associated data and wiki image, and add data object to array
 			if (searchResult[3].length > 0) {
 				const wikiData = await this.getWikiData(searchResult);
-				// console.log('getTwitterResults - wikiData[0]: ', wikiData[0]);
 				wikiDataForTweets.push(wikiData[0]);
 			}
-			// else console.log('getTwitterResults - NO SEARCH RESULT[3]');
 		}
 		this.updateContent(wikiDataForTweets);
 	};
@@ -173,7 +177,6 @@ class Search extends React.Component {
 	// Get image data from Wikipedia API, format and set all wiki data into a new array
 	getWikiData = async (data) => {
 		let tempArr = [];
-		// console.log('getWikiData - data: ', data);
 
 		// data[1] is the index for the resulting search titles
 		for (let i = 0; i < data[1].length; i++) {
@@ -187,22 +190,19 @@ class Search extends React.Component {
 
 			const imgData = await getWikiImg(data[1][i]);
 			wikiDataObj.imgSrc = cleanUpImgData(imgData);
-			// console.log('getWikiData - wikiDataObj: ', wikiDataObj);
 			tempArr[i] = wikiDataObj;
 		}
-		// console.log('getWikiData - tempArr: ', tempArr);
 		return tempArr;
 	};
 
 	updateContent(contentArr) {
-		// Callback to <Inputs> parent component
+		// Notify parent component of new card content
 		this.props.onSearch(contentArr);
 	}
 
-	handleTweetSearch(tweetsArr) {
-		// console.log('Search.jsx - handleTweetSearch() - tweetsArr: ', tweetsArr);
-		let wikiTweetsForCards = this.getTwitterResults(tweetsArr);
-		// console.log('Search.jsx - handleTweetSearch() - wikiTweetsForCards: ', wikiTweetsForCards);
+	clearContent() {
+		// Clear content (ie. cards)
+		this.updateContent([]);
 	}
 
 	render() {

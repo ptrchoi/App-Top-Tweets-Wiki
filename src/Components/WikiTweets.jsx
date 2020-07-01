@@ -99,7 +99,7 @@ class WikiTweets extends React.Component {
 		this.getData(this.state.locationID);
 	}
 	handleLocSelection(locationID) {
-		console.log('WikiTweets.jsx - handleLocSelection() - locationID: ', locationID);
+		// console.log('WikiTweets.jsx - handleLocSelection() - locationID: ', locationID);
 
 		this.setState({
 			locationID: locationID
