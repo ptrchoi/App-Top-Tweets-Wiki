@@ -41,7 +41,7 @@ function getTrendingOnTwitter(locationID) {
 	});
 }
 
-function parseTwitterData(data) {
+function fixTwitterData(data) {
 	let cleanedData = [];
 	let rawTweets = data[0].trends;
 
@@ -95,7 +95,7 @@ class WikiTweets extends React.Component {
 	handleClick(e) {
 		e.preventDefault();
 
-		console.log('WikiTweets.jsx - handleClick() - this.state.locationID: ', this.state.locationID);
+		// console.log('WikiTweets.jsx - handleClick() - this.state.locationID: ', this.state.locationID);
 		this.getData(this.state.locationID);
 	}
 	handleLocSelection(locationID) {
@@ -108,7 +108,7 @@ class WikiTweets extends React.Component {
 	// ASYNC - Intermediary step since handleClick has to be a function and not an object
 	getData = async (locationID) => {
 		const twitData = await getTrendingOnTwitter(locationID);
-		let tweets = parseTwitterData(twitData);
+		let tweets = fixTwitterData(twitData);
 		// console.log('tweets: ', tweets);
 		this.props.onTweetSearch(tweets);
 	};

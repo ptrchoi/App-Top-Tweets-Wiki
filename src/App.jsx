@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 // Components
 import Header from './Components/Header';
-import WikiTweets from './Components/WikiTweets';
 import Search from './Components/Search';
 import CardGrid from './Components/CardGrid';
 
@@ -51,16 +50,12 @@ class App extends React.Component {
 			cardContent: []
 		};
 
-		this.handleTweetSearch = this.handleTweetSearch.bind(this);
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
 	}
 	// Initialize card content upon Mounting
 	componentDidMount() {
 		this.handleSearchUpdate(testArray);
 		// this.handleLocationUpdate();
-	}
-	handleTweetSearch(tweets) {
-		console.log('App.jsx - handleTweetSearch() - tweets: ', tweets);
 	}
 	// Pass content updates from Inputs>Search comp to CardGrid comp
 	handleSearchUpdate(contentArr) {
@@ -77,10 +72,7 @@ class App extends React.Component {
 		return (
 			<div className="app-container">
 				<Header />
-				<div className="inputs-wrapper">
-					<WikiTweets locationID={locationID} onTweetSearch={this.handleTweetSearch} />
-					<Search onSearch={this.handleSearchUpdate} />
-				</div>
+				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} />
 			</div>
 		);

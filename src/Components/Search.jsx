@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import Autosuggest from 'react-autosuggest';
 
+import WikiTweets from './WikiTweets';
+
 const MAX_CARDS = 9;
 const MAX_SUGGESTIONS = 5;
 
@@ -27,12 +29,12 @@ function getWikiSuggestions(input) {
 }
 
 // Get search results for given string from Wikipedia API
-function getSearchResults(searchStr) {
+function getSearchResults(searchStr, numOfResults) {
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
 		'&limit=' +
-		MAX_CARDS +
+		numOfResults +
 		'&namespace=0&callback=?';
 
 	return new Promise((resolve, reject) => {
@@ -104,6 +106,8 @@ class Search extends React.Component {
 		this.suggestionToSearch = this.suggestionToSearch.bind(this);
 		this.getWikiData = this.getWikiData.bind(this);
 		this.updateContent = this.updateContent.bind(this);
+		this.handleTweetSearch = this.handleTweetSearch.bind(this);
+		this.getTwitterResults = this.getTwitterResults.bind(this);
 	}
 
 	// Automatically called by Autosuggest's onChange event
@@ -139,15 +143,37 @@ class Search extends React.Component {
 	// Intermediary step to avoid warnings with Autosuggest render method updates
 	// Asynch API calls to collect and format data => updates data
 	suggestionToSearch = async (suggestion) => {
-		const searchResults = await getSearchResults(suggestion);
+		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
+		// console.log('suggestionToSearch - searchResults: ', searchResults);
 		const wikiData = await this.getWikiData(searchResults);
 
 		this.updateContent(wikiData);
 	};
 
+	getTwitterResults = async (tweetsArr) => {
+		let wikiDataForTweets = [];
+
+		// Search for wiki results for each tweet in the tweetsArr
+		// console.log('tweetsArr: ', tweetsArr);
+		// for (let j = 0; j < 10; j++) {
+		for (let j = 0; j < tweetsArr.length; j++) {
+			const searchResult = await getSearchResults(tweetsArr[j], 1);
+			// console.log('getTwitterResults - searchResult: ', searchResult);
+			// console.log('getTwitterResults - searchResult[3]: ', searchResult[3]);
+			if (searchResult[3].length > 0) {
+				const wikiData = await this.getWikiData(searchResult);
+				// console.log('getTwitterResults - wikiData[0]: ', wikiData[0]);
+				wikiDataForTweets.push(wikiData[0]);
+			}
+			// else console.log('getTwitterResults - NO SEARCH RESULT[3]');
+		}
+		this.updateContent(wikiDataForTweets);
+	};
+
 	// Get image data from Wikipedia API, format and set all wiki data into a new array
 	getWikiData = async (data) => {
 		let tempArr = [];
+		// console.log('getWikiData - data: ', data);
 
 		// data[1] is the index for the resulting search titles
 		for (let i = 0; i < data[1].length; i++) {
@@ -161,8 +187,10 @@ class Search extends React.Component {
 
 			const imgData = await getWikiImg(data[1][i]);
 			wikiDataObj.imgSrc = cleanUpImgData(imgData);
+			// console.log('getWikiData - wikiDataObj: ', wikiDataObj);
 			tempArr[i] = wikiDataObj;
 		}
+		// console.log('getWikiData - tempArr: ', tempArr);
 		return tempArr;
 	};
 
@@ -170,6 +198,13 @@ class Search extends React.Component {
 		// Callback to <Inputs> parent component
 		this.props.onSearch(contentArr);
 	}
+
+	handleTweetSearch(tweetsArr) {
+		// console.log('Search.jsx - handleTweetSearch() - tweetsArr: ', tweetsArr);
+		let wikiTweetsForCards = this.getTwitterResults(tweetsArr);
+		// console.log('Search.jsx - handleTweetSearch() - wikiTweetsForCards: ', wikiTweetsForCards);
+	}
+
 	render() {
 		let { value, suggestions } = this.state;
 		const inputProps = {
@@ -179,18 +214,21 @@ class Search extends React.Component {
 		};
 
 		return (
-			<div className="search-wrapper">
-				<i className="fas fa-search" />
+			<div className="inputs-wrapper">
+				<WikiTweets onTweetSearch={this.handleTweetSearch} />
 
-				<Autosuggest
-					suggestions={suggestions}
-					onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-					onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-					getSuggestionValue={this.handleSuggestion}
-					highlightFirstSuggestion={true}
-					renderSuggestion={renderSuggestion}
-					inputProps={inputProps}
-				/>
+				<div className="search-wrapper">
+					<i className="fas fa-search" />
+					<Autosuggest
+						suggestions={suggestions}
+						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+						getSuggestionValue={this.handleSuggestion}
+						highlightFirstSuggestion={true}
+						renderSuggestion={renderSuggestion}
+						inputProps={inputProps}
+					/>
+				</div>
 			</div>
 		);
 	}
