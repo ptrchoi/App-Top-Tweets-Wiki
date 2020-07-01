@@ -1,20 +1,32 @@
 .inputs-wrapper {
 	align-items: center;
-	border: solid 3px black;
+	border-bottom: solid 3px black;
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
 }
 .search-wrapper {
 	align-items: center;
-	border: solid 1px orange;
+	// border: solid 1px orange;
 	display: flex;
 	flex-direction: row;
-	width: 40%;
+	width: 100%;
+}
+
+// Styling for the Autosuggest elements (ie. react-autosuggest__)
+.react-autosuggest__container {
+	// border: solid 1px purple;
+	margin: 10px;
+	width: 100%;
 }
 .react-autosuggest__suggestions-list {
+	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	list-style-type: none;
-	width: 100%;
+	width: 50%;
+}
+.react-autosuggest__input {
+	border: solid 1px black;
+	padding: 10px;
+	width: 50%;
 }

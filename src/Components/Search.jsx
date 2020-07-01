@@ -151,7 +151,6 @@ class Search extends React.Component {
 		this.clearContent();
 		this.loadingContent();
 		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
-		// console.log('suggestionToSearch - searchResults: ', searchResults);
 		const wikiData = await this.getWikiData(searchResults);
 
 		this.updateContent(wikiData);
@@ -196,8 +195,6 @@ class Search extends React.Component {
 				url: data[3][i]
 			};
 
-			// console.log('wikiDataObj: ', wikiDataObj);
-
 			const imgData = await getWikiImg(title);
 			wikiDataObj.imgSrc = cleanUpImgData(imgData);
 			tempArr[i] = wikiDataObj;
@@ -230,7 +227,7 @@ class Search extends React.Component {
 	render() {
 		let { value, suggestions } = this.state;
 		const inputProps = {
-			placeholder: 'search wikipedia here...',
+			placeholder: 'search any topic on Wikipedia ...',
 			value,
 			onChange: this.onChange
 		};
