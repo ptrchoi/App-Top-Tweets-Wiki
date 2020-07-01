@@ -109,6 +109,7 @@ class Search extends React.Component {
 		this.getWikiData = this.getWikiData.bind(this);
 		this.updateContent = this.updateContent.bind(this);
 		this.clearContent = this.clearContent.bind(this);
+		this.loadingContent = this.loadingContent.bind(this);
 	}
 
 	// Automatically called by Autosuggest's onChange event
@@ -145,6 +146,7 @@ class Search extends React.Component {
 	// Asynch API calls to collect and format data => updates data
 	suggestionToSearch = async (suggestion) => {
 		this.clearContent();
+		this.loadingContent();
 		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
 		// console.log('suggestionToSearch - searchResults: ', searchResults);
 		const wikiData = await this.getWikiData(searchResults);
@@ -154,6 +156,7 @@ class Search extends React.Component {
 
 	handleTweetSearch(tweetsArr) {
 		this.clearContent();
+		this.loadingContent();
 		let wikiTweetsForCards = this.getTwitterResults(tweetsArr);
 	}
 
@@ -203,6 +206,18 @@ class Search extends React.Component {
 	clearContent() {
 		// Clear content (ie. cards)
 		this.updateContent([]);
+	}
+	loadingContent() {
+		// Clear content (ie. cards)
+		this.updateContent([
+			{
+				id: 'card0',
+				title: 'Loading results...',
+				imgSrc: '',
+				text: '',
+				url: ''
+			}
+		]);
 	}
 
 	render() {
