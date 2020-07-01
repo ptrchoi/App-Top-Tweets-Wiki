@@ -1,7 +1,10 @@
+// Libs
 import React from 'react';
 import $ from 'jquery';
 import Autosuggest from 'react-autosuggest';
+import { v4 as uuidv4 } from 'uuid';
 
+// Modules
 import WikiTweets from './WikiTweets';
 
 const MAX_CARDS = 9;
@@ -184,7 +187,7 @@ class Search extends React.Component {
 		// data[1] is the index for the resulting search titles
 		for (let i = 0; i < data[1].length; i++) {
 			let wikiDataObj = {
-				id: 'card' + i,
+				id: uuidv4(),
 				title: data[1][i],
 				imgSrc: '',
 				text: 'text goes here',

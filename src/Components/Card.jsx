@@ -6,7 +6,7 @@ import React from 'react';
 function Card(props) {
 	let { cards } = props;
 
-	// console.log('<Card /> cards: ', cards);
+	console.log('<Card /> cards: ', cards);
 
 	let renderCards = () => {
 		return cards.map((card) => {
