@@ -236,7 +236,7 @@ class Search extends React.Component {
 			<div className="inputs-wrapper">
 				<WikiTweets onTweetSearch={this.handleTweetSearch} />
 
-				<div className="search-wrapper">
+				<div className="search-wrapper centered-h">
 					<i className="fas fa-search search-icon" />
 					<Autosuggest
 						suggestions={suggestions}

@@ -1,22 +1,26 @@
 .location-wrapper {
+	// border: solid 1px orange;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
-	column-gap: 20px;
-	row-gap: 20px;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	margin-top: 6px;
+	row-gap: 10px;
 	width: 100%;
 }
 .selection-wrapper {
+	align-items: center;
+	flex-direction: column;
+	display: flex;
 }
 .flag-wrapper {
 	align-items: center;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	height: 90px;
 	width: 90px;
 }
 .flag-image {
-	margin: 4px;
+	margin: 6px;
 	height: 32px;
 	width: 32px;
 }
@@ -38,7 +42,7 @@
 }
 /* CHECKED STYLES */
 [type=radio]:checked + label {
-	color: purple;
+	color: #38a1f3;
 	font-weight: bolder;
 	text-decoration: underline;
 }
