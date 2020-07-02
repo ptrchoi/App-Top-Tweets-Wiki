@@ -16,7 +16,7 @@ const cardImg = require('./images/cardImage.png');
 const testArray = [
 	{
 		id: 0,
-		title: 'Get Wikis...',
+		title: "Find out more about what's trending in your world...",
 		imgSrc: cardImg
 	}
 ];

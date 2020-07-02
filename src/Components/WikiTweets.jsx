@@ -116,10 +116,10 @@ class WikiTweets extends React.Component {
 	render(props) {
 		return (
 			<div className="wiki-tweets-wrapper">
+				<Location onLocSelection={this.handleLocSelection} />
 				<button id="twitterButton" onClick={this.handleClick}>
 					Get Wikipedia results for Top Trending Tweets
 				</button>
-				<Location onLocSelection={this.handleLocSelection} />
 			</div>
 		);
 	}
