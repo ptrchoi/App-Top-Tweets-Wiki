@@ -1,21 +1,24 @@
 .location-wrapper {
-	align-items: center;
-	// border: solid 1px orange;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+	column-gap: 20px;
+	row-gap: 20px;
+	width: 100%;
+}
+.selection-wrapper {
 }
 .flag-wrapper {
 	align-items: center;
 	display: flex;
 	flex-direction: row;
+	height: 90px;
+	width: 90px;
 }
 .flag-image {
-	margin: .5em;
+	margin: 4px;
 	height: 32px;
 	width: 32px;
-}
-.flag-label {
 }
 /* HIDE RADIO */
 [type=radio] {
@@ -24,11 +27,21 @@
 	width: 0;
 	height: 0;
 }
+[type=radio] + label {
+	color: gray;
+}
 /* IMAGE STYLES */
 [type=radio] + label > img {
+	height: 40px;
+	width: 40px;
 	cursor: pointer;
 }
 /* CHECKED STYLES */
+[type=radio]:checked + label {
+	color: purple;
+	font-weight: bolder;
+	text-decoration: underline;
+}
 [type=radio]:checked + label > img {
 	height: 50px;
 	width: 50px;
