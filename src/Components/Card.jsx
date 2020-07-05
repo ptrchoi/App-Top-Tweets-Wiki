@@ -15,11 +15,11 @@ function Card(props) {
 				imageClassList = imageClassList + ' hide-image';
 			}
 			return (
-				<div key={card.id} className="card-wrapper">
+				<div key={card.id} className="card-wrapper masonry-brick">
 					<img className={imageClassList} src={card.imgSrc} alt="title image" />
 					<h2>{card.title}</h2>
 					<a href={card.url} target="_blank">
-						{card.url}
+						{/* {card.url} */}
 					</a>
 				</div>
 			);

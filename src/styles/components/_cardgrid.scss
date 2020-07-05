@@ -1,7 +1,34 @@
 .cardgrid-wrapper {
-	align-items: center;
-	// border: solid 1px blue;
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
+	border: solid 1px blue;
+
+	// align-items: center;
+	// display: flex;
+	// flex-direction: column;
+	// margin: 0 auto;
+}
+.masonry {
+	/* Masonry container */
+	margin: 2px auto;
+	max-width: 1000px;
+	// column-gap: 2px;
+}
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+	.masonry {
+		column-count: 4;
+	}
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+	.masonry {
+		column-count: 3;
+	}
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+	.masonry {
+		column-count: 2;
+	}
 }
