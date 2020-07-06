@@ -1,10 +1,10 @@
 .inputs-wrapper {
 	align-items: center;
 	// border: solid 3px red;
-	border-bottom: solid 3px black;
+	// border-bottom: solid 3px black;
 	display: flex;
 	flex-direction: column;
-  justify-content: center;
+	justify-content: center;
 	margin-bottom: 20px;
 	padding: 20px;
 }
@@ -15,36 +15,54 @@
 	flex-direction: row;
 	justify-content: center;
 	margin: 30px;
+	position: relative;
 	width: 35%;
 }
 .search-icon {
 	color: gray;
 	font-size: 1.5rem;
-}
 
+	position: absolute;
+	left: 0;
+	top: 7px;
+}
 
 /* Styling for the Autosuggest elements (ie. react-autosuggest__)
 ---------------------------------------------------------------------*/
 .react-autosuggest__container {
-	// border: solid 1px purple;
+	// border: solid 1px green;
 	width: 100%;
 }
 .react-autosuggest__input {
+	// border: solid 1px gray;
 	border: none;
-	border-radius: 60px;
+	// border-radius: 60px;
 	box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+	color: gray;
 	font-size: 12px;
 	font-style: italic;
 	padding: 10px;
-	width: 93%;
-}
-.react-autosuggest__suggestions-list {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
+	width: 90%;
+
+	position: absolute;
+	left: 30px;
 }
 
+.react-autosuggest__suggestions-list {
+	color: gray;
+	font-style: italic;
+	list-style-type: none;
+	margin: 0;
+	// padding: 2px;
+	padding: 0;
+	width: 90%;
+
+	border: solid 1px #aaaaaa;
+
+	position: absolute;
+	left: 30px;
+	top: 40px;
+}
 
 /* General styling applied last
 ---------------------------------------------------------------------*/
@@ -53,4 +71,3 @@
 	margin-right: auto;
 	// width: 50%;
 }
-

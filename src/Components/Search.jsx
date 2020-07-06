@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 // Modules
 import WikiTweets from './WikiTweets';
 
-const MAX_CARDS = 9;
+const MAX_CARDS = 50;
 const MAX_SUGGESTIONS = 5;
 
 /* Functions and API calls
@@ -229,7 +229,8 @@ class Search extends React.Component {
 		const inputProps = {
 			placeholder: 'search any topic on Wikipedia ...',
 			value,
-			onChange: this.onChange
+			onChange: this.onChange,
+			type: 'search'
 		};
 
 		return (
