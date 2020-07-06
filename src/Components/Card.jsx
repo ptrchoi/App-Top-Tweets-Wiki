@@ -16,9 +16,9 @@ function Card(props) {
 			}
 			return (
 				<div key={card.id} className="card-wrapper masonry-brick">
-					<img className={imageClassList} src={card.imgSrc} alt="title image" />
-					<h2>{card.title}</h2>
 					<a href={card.url} target="_blank">
+						<img className={imageClassList} src={card.imgSrc} alt="title image" />
+						<h2>{card.title}</h2>
 						{/* {card.url} */}
 					</a>
 				</div>
