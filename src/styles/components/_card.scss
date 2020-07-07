@@ -7,18 +7,6 @@
 	font-size: .8rem;
 	text-align: center;
 
-	// height: auto;
-	// padding: 10px;
-	// width: auto;
-	// margin: 10px;
-
-	// margin: 15px;
-	// margin-bottom: 20px;
-	// padding: 50px;
-	// text-align: center;
-	// width: 50%;
-	// height: auto;
-	// word-wrap: break-word;
 	a {
 		text-decoration: none;
 	}
@@ -32,6 +20,10 @@
 }
 .hide-image {
 	display: none;
+}
+#loadingText {
+	color: #38a1f3;
+	font-size: 1.6rem;
 }
 .masonry-brick {
 	// background-color: #eee;

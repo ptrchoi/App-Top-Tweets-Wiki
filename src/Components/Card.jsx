@@ -20,6 +20,7 @@ function Card(props) {
 						<img className={imageClassList} src={card.imgSrc} alt="title image" />
 						<h2>{card.title}</h2>
 						{/* {card.url} */}
+						<p id="loadingText">{card.text}</p>
 					</a>
 				</div>
 			);

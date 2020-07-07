@@ -33,7 +33,6 @@ function getWikiSuggestions(input) {
 
 // Get search results from Wikipedia API for given string
 function getSearchResults(searchStr, numOfResults = 1) {
-	console.log('getSearchResults() - searchStr: ', searchStr);
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
@@ -195,7 +194,7 @@ class Search extends React.Component {
 				id: uuidv4(),
 				title: title,
 				imgSrc: '',
-				text: 'text goes here',
+				text: '',
 				url: data[3][i]
 			};
 
@@ -220,9 +219,9 @@ class Search extends React.Component {
 		this.updateContent([
 			{
 				id: 'card0',
-				title: 'Loading results...',
+				title: '',
 				imgSrc: '',
-				text: '',
+				text: 'Loading results...',
 				url: ''
 			}
 		]);

@@ -34,7 +34,7 @@ class App extends React.Component {
 	}
 	// Initialize card content upon Mounting
 	componentDidMount() {
-		this.handleSearchUpdate(testArray);
+		// this.handleSearchUpdate(testArray);
 		// this.handleLocationUpdate();
 	}
 	// Pass content updates from Inputs>Search comp to CardGrid comp
