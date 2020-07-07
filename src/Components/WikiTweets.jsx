@@ -14,7 +14,7 @@ if (!String.prototype.splice) {
 // Get top 50 trending tweets by locationID
 function getTrendingOnTwitter(locationID) {
 	if (isNaN(locationID) || locationID <= 0) {
-		locationID = 1;
+		locationID = 2487956; //default to SF
 	}
 
 	const request = require('request');
@@ -41,7 +41,7 @@ function getTrendingOnTwitter(locationID) {
 	});
 }
 
-function fixTwitterData(data) {
+function fixTwitterData(data, locationID) {
 	let cleanedData = [];
 	let rawTweets = data[0].trends;
 
@@ -84,7 +84,7 @@ class WikiTweets extends React.Component {
 		super(props);
 
 		this.state = {
-			locationID: 1
+			locationID: 2487956
 		};
 
 		this.handleClick = this.handleClick.bind(this);
@@ -108,7 +108,7 @@ class WikiTweets extends React.Component {
 	// ASYNC - Intermediary step since handleClick has to be a function and not an object
 	getData = async (locationID) => {
 		const twitData = await getTrendingOnTwitter(locationID);
-		let tweets = fixTwitterData(twitData);
+		let tweets = fixTwitterData(twitData, locationID);
 		// console.log('tweets: ', tweets);
 		this.props.onTweetSearch(tweets);
 	};
@@ -117,7 +117,7 @@ class WikiTweets extends React.Component {
 		return (
 			<div className="wiki-tweets-wrapper">
 				<button id="twitterButton" onClick={this.handleClick}>
-					Get Wikipedia results for Top Trending Tweets
+					Get Wikipedia results of the Top Trending Tweets for
 				</button>
 				<Location onLocSelection={this.handleLocSelection} />
 			</div>

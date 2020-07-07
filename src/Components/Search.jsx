@@ -222,7 +222,7 @@ class Search extends React.Component {
 	render() {
 		let { value, suggestions } = this.state;
 		const inputProps = {
-			placeholder: 'search any topic on Wikipedia ...',
+			placeholder: 'or search any topic on Wikipedia ...',
 			value,
 			onChange: this.onChange,
 			type: 'search'
