@@ -1,7 +1,7 @@
 .location-wrapper {
 	// border: solid 1px orange;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	// margin-top: 2px;
 	row-gap: 10px;
@@ -33,7 +33,7 @@
 	height: 0;
 }
 [type=radio] + label {
-	color: gray;
+	color: rgb(155, 155, 155);
 }
 /* IMAGE STYLES */
 [type=radio] + label > img {
@@ -44,14 +44,15 @@
 /* CHECKED STYLES */
 [type=radio]:checked + label {
 	color: #38a1f3;
-	font-size: .9rem;
+	font-size: 1.1rem;
 	font-weight: bolder;
 	// text-decoration: underline;
 }
 [type=radio]:checked + label > img {
-	height: 38px;
-	width: 38px;
-	border: solid 3px #38a1f3;
+	height: 26px;
+	width: 26px;
+	// border: solid 1px #38a1f3;
+	// border: solid 1px black;
 	border-radius: 60px;
 	box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.5), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
 }

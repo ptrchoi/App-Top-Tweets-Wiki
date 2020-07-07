@@ -64,7 +64,10 @@
 	left: 30px;
 	top: 40px;
 }
-
+.react-autosuggest__suggestion--highlighted {
+	// color: #38a1f3;
+	color: red;
+}
 /* General styling applied last
 ---------------------------------------------------------------------*/
 .centered-h {

@@ -33,6 +33,7 @@ function getWikiSuggestions(input) {
 
 // Get search results from Wikipedia API for given string
 function getSearchResults(searchStr, numOfResults = 1) {
+	console.log('getSearchResults() - searchStr: ', searchStr);
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
@@ -106,6 +107,7 @@ class Search extends React.Component {
 		this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.handleSuggestion = this.handleSuggestion.bind(this);
+		this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
 		this.suggestionToSearch = this.suggestionToSearch.bind(this);
 		this.handleTweetSearch = this.handleTweetSearch.bind(this);
 		this.getTwitterResults = this.getTwitterResults.bind(this);
@@ -140,9 +142,11 @@ class Search extends React.Component {
 
 	// Automatically called by Autosuggest: Tells Autosuggest what to do with suggestion value
 	handleSuggestion = (suggestion) => {
-		this.suggestionToSearch(suggestion);
-
 		return suggestion;
+	};
+
+	onSuggestionSelected = (e, suggestion) => {
+		this.suggestionToSearch(suggestion.suggestion);
 	};
 
 	// Intermediary step to avoid warnings with Autosuggest render method updates
@@ -244,7 +248,7 @@ class Search extends React.Component {
 						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
 						getSuggestionValue={this.handleSuggestion}
-						highlightFirstSuggestion={true}
+						onSuggestionSelected={this.onSuggestionSelected}
 						renderSuggestion={renderSuggestion}
 						inputProps={inputProps}
 					/>

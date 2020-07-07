@@ -70,13 +70,13 @@ class Location extends React.Component {
 						id="input3"
 						type="radio"
 						name="country"
-						value="2357024"
+						value="2424766"
 						onChange={this.handleChange}
-						checked={selectedOption === '2357024'}
+						checked={selectedOption === '2424766'}
 					/>
 					<label htmlFor="input3" className="flag-wrapper">
 						<img className="flag-image" src={imgUS} />
-						ATL
+						HOU
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -84,13 +84,13 @@ class Location extends React.Component {
 						id="input4"
 						type="radio"
 						name="country"
-						value="2459115"
+						value="2357024"
 						onChange={this.handleChange}
-						checked={selectedOption === '2459115'}
+						checked={selectedOption === '2357024'}
 					/>
 					<label htmlFor="input4" className="flag-wrapper">
 						<img className="flag-image" src={imgUS} />
-						N.Y.
+						ATL
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -98,13 +98,13 @@ class Location extends React.Component {
 						id="input5"
 						type="radio"
 						name="country"
-						value="9807"
+						value="2459115"
 						onChange={this.handleChange}
-						checked={selectedOption === '9807'}
+						checked={selectedOption === '2459115'}
 					/>
 					<label htmlFor="input5" className="flag-wrapper">
-						<img className="flag-image" src={imgCA} />
-						VAN
+						<img className="flag-image" src={imgUS} />
+						N.Y.
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -112,13 +112,13 @@ class Location extends React.Component {
 						id="input6"
 						type="radio"
 						name="country"
-						value="116545"
+						value="9807"
 						onChange={this.handleChange}
-						checked={selectedOption === '116545'}
+						checked={selectedOption === '9807'}
 					/>
 					<label htmlFor="input6" className="flag-wrapper">
-						<img className="flag-image" src={imgMX} />
-						MEX
+						<img className="flag-image" src={imgCA} />
+						VAN
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -126,13 +126,13 @@ class Location extends React.Component {
 						id="input7"
 						type="radio"
 						name="country"
-						value="455825"
+						value="116545"
 						onChange={this.handleChange}
-						checked={selectedOption === '455825'}
+						checked={selectedOption === '116545'}
 					/>
 					<label htmlFor="input7" className="flag-wrapper">
-						<img className="flag-image" src={imgBR} />
-						RIO
+						<img className="flag-image" src={imgMX} />
+						MEX
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -140,13 +140,13 @@ class Location extends React.Component {
 						id="input8"
 						type="radio"
 						name="country"
-						value="44418"
+						value="455825"
 						onChange={this.handleChange}
-						checked={selectedOption === '44418'}
+						checked={selectedOption === '455825'}
 					/>
 					<label htmlFor="input8" className="flag-wrapper">
-						<img className="flag-image" src={imgGB} />
-						LON
+						<img className="flag-image" src={imgBR} />
+						RIO
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -154,13 +154,13 @@ class Location extends React.Component {
 						id="input9"
 						type="radio"
 						name="country"
-						value="638242"
+						value="44418"
 						onChange={this.handleChange}
-						checked={selectedOption === '638242'}
+						checked={selectedOption === '44418'}
 					/>
 					<label htmlFor="input9" className="flag-wrapper">
-						<img className="flag-image" src={imgDE} />
-						BER
+						<img className="flag-image" src={imgGB} />
+						LON
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -168,13 +168,13 @@ class Location extends React.Component {
 						id="input10"
 						type="radio"
 						name="country"
-						value="766273"
+						value="638242"
 						onChange={this.handleChange}
-						checked={selectedOption === '766273'}
+						checked={selectedOption === '638242'}
 					/>
 					<label htmlFor="input10" className="flag-wrapper">
-						<img className="flag-image" src={imgES} />
-						MAD
+						<img className="flag-image" src={imgDE} />
+						BER
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -182,13 +182,13 @@ class Location extends React.Component {
 						id="input11"
 						type="radio"
 						name="country"
-						value="615702"
+						value="766273"
 						onChange={this.handleChange}
-						checked={selectedOption === '615702'}
+						checked={selectedOption === '766273'}
 					/>
 					<label htmlFor="input11" className="flag-wrapper">
-						<img className="flag-image" src={imgFR} />
-						PAR
+						<img className="flag-image" src={imgES} />
+						MAD
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -196,27 +196,43 @@ class Location extends React.Component {
 						id="input12"
 						type="radio"
 						name="country"
+						value="615702"
+						onChange={this.handleChange}
+						checked={selectedOption === '615702'}
+					/>
+					<label htmlFor="input12" className="flag-wrapper">
+						<img className="flag-image" src={imgFR} />
+						PAR
+					</label>
+				</div>
+				<div className="selection-wrapper">
+					<input
+						id="input13"
+						type="radio"
+						name="country"
 						value="721943"
 						onChange={this.handleChange}
 						checked={selectedOption === '721943'}
 					/>
-					<label htmlFor="input12" className="flag-wrapper">
+					<label htmlFor="input13" className="flag-wrapper">
 						<img className="flag-image" src={imgIT} />
 						ROM
 					</label>
 				</div>
-				{/* <input
-					id="input13"
-					type="radio"
-					name="country"
-					value="1105779"
-					onChange={this.handleChange}
-					checked={selectedOption === '1105779'}
-				/>
-				<label htmlFor="input13" className="flag-wrapper">
-					<img className="flag-image" src={imgAU} />
-					SYD
-				</label> */}
+				<div className="selection-wrapper">
+					<input
+						id="input14"
+						type="radio"
+						name="country"
+						value="1105779"
+						onChange={this.handleChange}
+						checked={selectedOption === '1105779'}
+					/>
+					<label htmlFor="input14" className="flag-wrapper">
+						<img className="flag-image" src={imgAU} />
+						SYD
+					</label>
+				</div>
 			</div>
 		);
 	}
