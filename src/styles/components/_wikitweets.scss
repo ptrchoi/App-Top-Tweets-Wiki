@@ -6,7 +6,7 @@
 	padding-top: 50px;
 }
 #twitterButton {
-	background-color: #15202b;
+	// background-color: #15202b;
 	// background-color: #1ea1f2;
 	color: white;
 	// border: solid 1px #156ba0;
@@ -14,7 +14,18 @@
 	// box-shadow: 10px 10px 14px 0 rgba(0, 0, 0, 0.4), -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
 	box-shadow: 6px 6px 9px 0 rgba(0, 0, 0, 0.5), -6px -6px 10px 0 rgba(255, 255, 255, 0.7);
 	font-size: .8rem;
-	height: 45px;
+	height: 60px;
 	margin: 1.5rem;
 	width: 100%;
+}
+.main-button {
+	background-color: #15202b;
+	border: solid 4px green;
+}
+.main-button--inactive {
+	background-color: gray;
+	border: solid 4px red;
+}
+#cityName {
+	color: #38a1f3;
 }

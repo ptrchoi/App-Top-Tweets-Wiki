@@ -105,7 +105,8 @@ class Search extends React.Component {
 
 		this.state = {
 			value: '',
-			suggestions: []
+			suggestions: [],
+			loadingDone: true
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -212,6 +213,19 @@ class Search extends React.Component {
 	// contentType = 'loading' || 'search' || 'tweets' (used for UX messaging)
 	updateContent(contentArr, contentType) {
 		this.props.onSearch(contentArr, contentType);
+
+		// Update loading status based on updateContent event types
+		if (contentType === 'clear') {
+			console.log('updateContent() setting loading done to false - contentType: ', contentType);
+			this.setState({
+				loadingDone: false
+			});
+		} else if (contentType === 'search' || contentType === 'tweets') {
+			console.log('updateContent() setting loading done to true - contentType: ', contentType);
+			this.setState({
+				loadingDone: true
+			});
+		}
 	}
 
 	// Clears card contents
@@ -238,7 +252,7 @@ class Search extends React.Component {
 
 		return (
 			<div className="inputs-wrapper">
-				<WikiTweets onTweetSearch={this.handleTweetSearch} />
+				<WikiTweets onTweetSearch={this.handleTweetSearch} loadingDone={this.state.loadingDone} />
 
 				<div className="search-wrapper centered-h">
 					<i className="fas fa-search search-icon" />

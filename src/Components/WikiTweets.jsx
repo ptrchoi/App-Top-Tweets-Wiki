@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import $ from 'jquery';
 
 // Modules
 import Location from './Location';
@@ -91,24 +92,36 @@ class WikiTweets extends React.Component {
 		super(props);
 
 		this.state = {
-			locationID: 2487956
+			locationID: 1,
+			locationName: ''
 		};
 
 		this.handleClick = this.handleClick.bind(this);
+		this.pauseInput = this.pauseInput.bind(this);
 		this.handleLocSelection = this.handleLocSelection.bind(this);
 		this.getData = this.getData.bind(this);
 	}
 
 	// Handle Tweet-to-Wiki button click
-	handleClick(e) {
+	handleClick(e, loadingDone) {
 		e.preventDefault();
+		this.pauseInput(loadingDone);
 		this.getData(this.state.locationID);
 	}
 
+	// Pause/Unpause button input while waiting for Async results to load
+	pauseInput(pause) {
+		console.log('pauseInput() - pause: ', pause);
+		$('#twitterButton').prop('disabled', pause);
+	}
+
 	// Handle location updates from <Location> component
-	handleLocSelection(locationID) {
+	handleLocSelection(locationID, locationName) {
+		console.log('handleLocSelection() - locationID: ', locationID);
+		console.log('handleLocSelection() - locationName: ', locationName);
 		this.setState({
-			locationID: locationID
+			locationID: locationID,
+			locationName: locationName
 		});
 	}
 
@@ -122,10 +135,24 @@ class WikiTweets extends React.Component {
 	};
 
 	render(props) {
+		let { loadingDone } = this.props;
+
+		console.log('<WikiTweets> props.loadingDone: ', loadingDone);
+
+		let btnClassList = 'main-button';
+		if (!loadingDone) btnClassList = 'main-button--inactive';
+
 		return (
 			<div className="wiki-tweets-wrapper">
-				<button id="twitterButton" onClick={this.handleClick}>
-					Get Wikipedia results of the Top Trending Tweets for
+				<button
+					id="twitterButton"
+					className={btnClassList}
+					onClick={(e) => {
+						this.handleClick(e, loadingDone);
+					}}
+				>
+					Get Wikipedia results of the Top Trending Tweets for<br />
+					<span id="cityName">{this.state.locationName}</span>
 				</button>
 				<Location onLocSelection={this.handleLocSelection} />
 			</div>

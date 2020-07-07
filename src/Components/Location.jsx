@@ -17,89 +17,109 @@ const imgNE = require('../images/net.png');
 const LOCATIONS = [
 	{
 		id: 'input1',
-		city: 'S.F.',
+		cityAbb: 'S.F.',
+		cityFull: 'San Francisco, California',
 		WOEID: '2487956',
 		flagImg: imgUS
 	},
 	{
 		id: 'input2',
-		city: 'L.A.',
+		cityAbb: 'L.A.',
+		cityFull: 'Los Angeles, California',
 		WOEID: '2442047',
 		flagImg: imgUS
 	},
 	{
 		id: 'input3',
-		city: 'HOU',
+		cityAbb: 'HOU',
+		cityFull: 'Houston, Texas',
 		WOEID: '2424766',
 		flagImg: imgUS
 	},
 	{
 		id: 'input4',
-		city: 'CHI',
+		cityAbb: 'CHI',
+		cityFull: 'Chicago, Illinois',
 		WOEID: '2379574',
 		flagImg: imgUS
 	},
 	{
 		id: 'input5',
-		city: 'N.Y.',
+		cityAbb: 'N.Y.',
+		cityFull: 'New York City, New York',
 		WOEID: '2459115',
 		flagImg: imgUS
 	},
 	{
 		id: 'input6',
-		city: 'VAN',
+		cityAbb: 'VAN',
+		cityFull: 'Vancouver, British Columbia',
 		WOEID: '9807',
 		flagImg: imgCA
 	},
 	{
 		id: 'input7',
-		city: 'MEX',
+		cityAbb: 'MEX',
+		cityFull: 'Mexico City, Mexico',
 		WOEID: '116545',
 		flagImg: imgMX
 	},
 	{
 		id: 'input8',
-		city: 'RIO',
+		cityAbb: 'RIO',
+		cityFull: 'Rio de Janeiro, Brazil',
 		WOEID: '455825',
 		flagImg: imgBR
 	},
 	{
 		id: 'input9',
-		city: 'LON',
+		cityAbb: 'LON',
+		cityFull: 'London, England',
 		WOEID: '44418',
 		flagImg: imgGB
 	},
 	{
 		id: 'input10',
-		city: 'AMS',
+		cityAbb: 'AMS',
+		cityFull: 'Amsterdam, Netherlands',
 		WOEID: '727232',
 		flagImg: imgNE
 	},
 	{
 		id: 'input11',
-		city: 'BER',
+		cityAbb: 'BER',
+		cityFull: 'Berlin, Germany',
 		WOEID: '638242',
 		flagImg: imgDE
 	},
 	{
 		id: 'input12',
-		city: 'PAR',
+		cityAbb: 'PAR',
+		cityFull: 'Paris, France',
 		WOEID: '615702',
 		flagImg: imgFR
 	},
 	{
 		id: 'input13',
-		city: 'MAD',
+		cityAbb: 'MAD',
+		cityFull: 'Madrid, Spain',
 		WOEID: '766273',
 		flagImg: imgES
 	},
 	{
 		id: 'input14',
-		city: 'ROM',
+		cityAbb: 'ROM',
+		cityFull: 'Rome, Italy',
 		WOEID: '721943',
 		flagImg: imgIT
 	}
 ];
+
+const getCityNameForID = (id) => {
+	return LOCATIONS.find((item) => {
+		if (item.WOEID === id) return item;
+	}).cityFull;
+};
 
 class Location extends React.Component {
 	constructor(props) {
@@ -111,17 +131,18 @@ class Location extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
+		const defaultID = this.state.selectedWOEID;
 		// Notify parent of initial default location
-		this.props.onLocSelection(this.state.selectedWOEID); // default to first entry = S.F.
+		this.props.onLocSelection(defaultID, getCityNameForID(defaultID)); // default to first entry = S.F.
 	}
 	handleChange(e) {
-		let selectedLocation = e.target.value;
+		let selectedWOEID = e.target.value;
 
 		// Notify parent of location selection update
-		this.props.onLocSelection(selectedLocation);
+		this.props.onLocSelection(selectedWOEID, getCityNameForID(selectedWOEID));
 
 		this.setState({
-			selectedWOEID: selectedLocation
+			selectedWOEID: selectedWOEID
 		});
 	}
 
@@ -143,7 +164,7 @@ class Location extends React.Component {
 						/>
 						<label htmlFor={location.id} className="flag-wrapper">
 							<img className="flag-image" src={location.flagImg} />
-							{location.city}
+							{location.cityAbb}
 						</label>
 					</div>
 				);
