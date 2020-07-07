@@ -4,13 +4,20 @@ import React from 'react';
 import Card from './Card';
 
 function CardGrid(props) {
-	// let cardCount = testArray.length;
-	let { cardCount, cardContent } = props;
+	let { cardCount, cardContent, contentType } = props;
 
-	// console.log('cardCount: ', cardCount);
+	let title = '';
+
+	if (contentType === 'search') title = 'Search Results Found on Wikipedia...';
+	else if (contentType === 'tweets') title = 'Top Trending Tweets with entries Found on Wikipedia...';
+	else if (contentType === 'loading') title = 'Loading results...';
+
 	return (
-		<div className="cardgrid-wrapper masonry">
-			<Card cards={cardContent} />
+		<div className="cardgrid-container">
+			<p className="cardgrid-title">{title}</p>
+			<div className="cardgrid-wrapper masonry">
+				<Card cards={cardContent} />
+			</div>
 		</div>
 	);
 }

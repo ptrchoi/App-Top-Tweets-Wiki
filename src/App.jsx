@@ -26,8 +26,9 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			cardCount: 4,
-			cardContent: []
+			cardCount: 0,
+			cardContent: [],
+			contentType: 'clear'
 		};
 
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
@@ -38,22 +39,23 @@ class App extends React.Component {
 		// this.handleLocationUpdate();
 	}
 	// Pass content updates from Inputs>Search comp to CardGrid comp
-	handleSearchUpdate(contentArr) {
+	handleSearchUpdate(contentArr, contentType) {
 		// console.log('App.jsx - handleSearchUpdate() - arr: ', contentArr);
-		// console.log('App.jsx - handleSearchUpdate() - cardCount: ', contentArr.length);
+		console.log('App.jsx - handleSearchUpdate() - contentType: ', contentType);
 
 		this.setState({
 			cardCount: contentArr.length,
-			cardContent: contentArr
+			cardContent: contentArr,
+			contentType: contentType
 		});
 	}
 	render() {
-		const { cardCount, cardContent } = this.state;
+		const { cardCount, cardContent, contentType } = this.state;
 		return (
 			<div className="app-container">
 				<Header />
 				<Search onSearch={this.handleSearchUpdate} />
-				<CardGrid cardCount={cardCount} cardContent={cardContent} />
+				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>
 		);
 	}

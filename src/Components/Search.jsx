@@ -156,7 +156,7 @@ class Search extends React.Component {
 		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
 		const wikiData = await this.getWikiData(searchResults);
 
-		this.updateContent(wikiData);
+		this.updateContent(wikiData, 'search');
 	};
 
 	handleTweetSearch(tweetsArr) {
@@ -179,7 +179,7 @@ class Search extends React.Component {
 				wikiDataForTweets.push(wikiData[0]);
 			}
 		}
-		this.updateContent(wikiDataForTweets);
+		this.updateContent(wikiDataForTweets, 'tweets');
 	};
 
 	// Get image data from Wikipedia API, format and set all wiki data into a new array
@@ -205,26 +205,18 @@ class Search extends React.Component {
 		return tempArr;
 	};
 
-	updateContent(contentArr) {
+	updateContent(contentArr, contentType) {
 		// Notify parent component of new card content
-		this.props.onSearch(contentArr);
+		this.props.onSearch(contentArr, contentType);
 	}
 
 	clearContent() {
 		// Clear content (ie. cards)
-		this.updateContent([]);
+		this.updateContent([], 'clear');
 	}
 	loadingContent() {
 		// Clear content (ie. cards)
-		this.updateContent([
-			{
-				id: 'card0',
-				title: '',
-				imgSrc: '',
-				text: 'Loading results...',
-				url: ''
-			}
-		]);
+		this.updateContent([], 'loading');
 	}
 
 	render() {
