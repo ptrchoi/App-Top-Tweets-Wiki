@@ -47,8 +47,8 @@ class Location extends React.Component {
 						checked={selectedOption === '1'}
 					/>
 					<label htmlFor="input1" className="flag-wrapper">
-						INT
 						<img className="flag-image" src={imgGLO} />
+						INT
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -61,8 +61,8 @@ class Location extends React.Component {
 						checked={selectedOption === '2487956'}
 					/>
 					<label htmlFor="input2" className="flag-wrapper">
-						S.F.
 						<img className="flag-image" src={imgUS} />
+						S.F.
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -75,8 +75,8 @@ class Location extends React.Component {
 						checked={selectedOption === '2357024'}
 					/>
 					<label htmlFor="input3" className="flag-wrapper">
-						ATL
 						<img className="flag-image" src={imgUS} />
+						ATL
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -89,8 +89,8 @@ class Location extends React.Component {
 						checked={selectedOption === '2459115'}
 					/>
 					<label htmlFor="input4" className="flag-wrapper">
-						N.Y.
 						<img className="flag-image" src={imgUS} />
+						N.Y.
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -103,8 +103,8 @@ class Location extends React.Component {
 						checked={selectedOption === '9807'}
 					/>
 					<label htmlFor="input5" className="flag-wrapper">
-						VAN
 						<img className="flag-image" src={imgCA} />
+						VAN
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -117,8 +117,8 @@ class Location extends React.Component {
 						checked={selectedOption === '116545'}
 					/>
 					<label htmlFor="input6" className="flag-wrapper">
-						MEX
 						<img className="flag-image" src={imgMX} />
+						MEX
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -131,8 +131,8 @@ class Location extends React.Component {
 						checked={selectedOption === '455825'}
 					/>
 					<label htmlFor="input7" className="flag-wrapper">
-						RIO
 						<img className="flag-image" src={imgBR} />
+						RIO
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -145,8 +145,8 @@ class Location extends React.Component {
 						checked={selectedOption === '44418'}
 					/>
 					<label htmlFor="input8" className="flag-wrapper">
-						LON
 						<img className="flag-image" src={imgGB} />
+						LON
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -159,8 +159,8 @@ class Location extends React.Component {
 						checked={selectedOption === '638242'}
 					/>
 					<label htmlFor="input9" className="flag-wrapper">
-						BER
 						<img className="flag-image" src={imgDE} />
+						BER
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -173,8 +173,8 @@ class Location extends React.Component {
 						checked={selectedOption === '766273'}
 					/>
 					<label htmlFor="input10" className="flag-wrapper">
-						MAD
 						<img className="flag-image" src={imgES} />
+						MAD
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -187,8 +187,8 @@ class Location extends React.Component {
 						checked={selectedOption === '615702'}
 					/>
 					<label htmlFor="input11" className="flag-wrapper">
-						PAR
 						<img className="flag-image" src={imgFR} />
+						PAR
 					</label>
 				</div>
 				<div className="selection-wrapper">
@@ -201,8 +201,8 @@ class Location extends React.Component {
 						checked={selectedOption === '721943'}
 					/>
 					<label htmlFor="input12" className="flag-wrapper">
-						ROM
 						<img className="flag-image" src={imgIT} />
+						ROM
 					</label>
 				</div>
 				{/* <input
