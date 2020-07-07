@@ -1,5 +1,7 @@
+// Libs
 import React from 'react';
 
+// Modules
 import Location from './Location';
 
 /* Functions
@@ -41,7 +43,10 @@ function getTrendingOnTwitter(locationID) {
 	});
 }
 
-function fixTwitterData(data, locationID) {
+// Clean Twitter data up
+// 	- Remove leading #
+//	- Add space to Mixed case strings (ie. BlackLivesMatter => Black Lives Matter)
+function fixTwitterData(data) {
 	let cleanedData = [];
 	let rawTweets = data[0].trends;
 
@@ -79,6 +84,8 @@ function fixTwitterData(data, locationID) {
 	return cleanedData;
 }
 
+/* WikiTweets Component
+----------------------------------------------------------- */
 class WikiTweets extends React.Component {
 	constructor(props) {
 		super(props);
@@ -92,24 +99,25 @@ class WikiTweets extends React.Component {
 		this.getData = this.getData.bind(this);
 	}
 
+	// Handle Tweet-to-Wiki button click
 	handleClick(e) {
 		e.preventDefault();
-
-		// console.log('WikiTweets.jsx - handleClick() - this.state.locationID: ', this.state.locationID);
 		this.getData(this.state.locationID);
 	}
-	handleLocSelection(locationID) {
-		// console.log('WikiTweets.jsx - handleLocSelection() - locationID: ', locationID);
 
+	// Handle location updates from <Location> component
+	handleLocSelection(locationID) {
 		this.setState({
 			locationID: locationID
 		});
 	}
+
 	// ASYNC - Intermediary step since handleClick has to be a function and not an object
 	getData = async (locationID) => {
 		const twitData = await getTrendingOnTwitter(locationID);
-		let tweets = fixTwitterData(twitData, locationID);
-		// console.log('tweets: ', tweets);
+		let tweets = fixTwitterData(twitData);
+
+		// Notify parent of tweet search content update
 		this.props.onTweetSearch(tweets);
 	};
 

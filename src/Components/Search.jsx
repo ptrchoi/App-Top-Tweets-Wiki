@@ -32,7 +32,7 @@ function getWikiSuggestions(input) {
 }
 
 // Get search results from Wikipedia API for given string
-function getSearchResults(searchStr, numOfResults = 1) {
+function getWikiSearchResults(searchStr, numOfResults = 1) {
 	const wikiSearchUrl =
 		'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' +
 		searchStr +
@@ -65,7 +65,7 @@ function getWikiImg(str) {
 	});
 }
 
-// Format image Data into a simple url
+// Format Wikipedia image Data into a simple url
 function cleanUpImgData(imgData) {
 	let wikiStr = JSON.stringify(imgData);
 	let n = wikiStr.search('"original":');
@@ -86,7 +86,13 @@ function cleanUpImgData(imgData) {
 	return imageURL;
 }
 
-// Tells Autosuggest how to render suggestions (ie. dropdown list)
+// getSuggestionValue() automatically called by Autosuggest: this req'd function teaches Autosuggest what the input value should be when a suggestion value is highlighted.
+// Here, we're simply passing the suggestion string back as the input value.
+const handleSuggestion = (suggestion) => {
+	return suggestion;
+};
+
+// Automatically called by Autosuggest: Tells Autosuggest how to render suggestions
 const renderSuggestion = (suggestion) => {
 	return <div className="renderSuggestionDiv">{suggestion}</div>;
 };
@@ -105,11 +111,10 @@ class Search extends React.Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
-		this.handleSuggestion = this.handleSuggestion.bind(this);
 		this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
-		this.suggestionToSearch = this.suggestionToSearch.bind(this);
+		this.suggestionToWikiSearch = this.suggestionToWikiSearch.bind(this);
 		this.handleTweetSearch = this.handleTweetSearch.bind(this);
-		this.getTwitterResults = this.getTwitterResults.bind(this);
+		this.tweetsToWikiSearch = this.tweetsToWikiSearch.bind(this);
 		this.getWikiData = this.getWikiData.bind(this);
 		this.updateContent = this.updateContent.bind(this);
 		this.clearContent = this.clearContent.bind(this);
@@ -123,7 +128,8 @@ class Search extends React.Component {
 		});
 	};
 
-	// Automatically called by Autosuggest's input event
+	// Automatically called by Autosuggest's input event;
+	// Async call to Wikipedia API to get suggestions for dropdown list
 	onSuggestionsFetchRequested = async ({ value }) => {
 		const suggestions = await getWikiSuggestions(value);
 
@@ -139,38 +145,35 @@ class Search extends React.Component {
 		});
 	};
 
-	// Automatically called by Autosuggest: Tells Autosuggest what to do with suggestion value
-	handleSuggestion = (suggestion) => {
-		return suggestion;
-	};
-
+	// Optional Autosuggest function: called on selection event (mouse/keyboard/touch) from list; suggestion obj comes from Autosuggest's req'd `handleSuggestion()` method.
 	onSuggestionSelected = (e, suggestion) => {
-		this.suggestionToSearch(suggestion.suggestion);
+		this.suggestionToWikiSearch(suggestion.suggestion); //Pass in only the suggestion obj's suggestion string
 	};
 
-	// Intermediary step to avoid warnings with Autosuggest render method updates
-	// Asynch API calls to collect and format data => updates data
-	suggestionToSearch = async (suggestion) => {
+	// Async API calls to collect and format data => updates content to pass to parent with contentType='search'
+	suggestionToWikiSearch = async (suggestion) => {
 		this.clearContent();
-		this.loadingContent();
-		const searchResults = await getSearchResults(suggestion, MAX_CARDS);
+		this.loadingContent(); //Notify parent contentType='loading'
+		const searchResults = await getWikiSearchResults(suggestion, MAX_CARDS);
 		const wikiData = await this.getWikiData(searchResults);
 
-		this.updateContent(wikiData, 'search');
+		this.updateContent(wikiData, 'search'); //Notify parent contentType='search'
 	};
 
+	// Handles Tweet-to-Wiki search event from child <WikiTweets />
 	handleTweetSearch(tweetsArr) {
 		this.clearContent();
-		this.loadingContent();
-		let wikiTweetsForCards = this.getTwitterResults(tweetsArr);
+		this.loadingContent(); //Notify parent contentType='loading'
+		this.tweetsToWikiSearch(tweetsArr); //Get Wikipedia results for given tweetsArr
 	}
 
-	getTwitterResults = async (tweetsArr) => {
+	// Async API calls to search and format Wiki results => updates content to pass to parent with contentType='tweets'
+	tweetsToWikiSearch = async (tweetsArr) => {
 		let wikiDataForTweets = [];
 
 		// Search for wiki results for each tweet in the tweetsArr
 		for (let j = 0; j < tweetsArr.length; j++) {
-			const searchResult = await getSearchResults(tweetsArr[j], 1);
+			const searchResult = await getWikiSearchResults(tweetsArr[j], 1);
 
 			// Check if there are any Wikipedia results for the title.
 			// If so, get associated data and wiki image, and add data object to array
@@ -182,7 +185,7 @@ class Search extends React.Component {
 		this.updateContent(wikiDataForTweets, 'tweets');
 	};
 
-	// Get image data from Wikipedia API, format and set all wiki data into a new array
+	// Returns array of formatted Wiki data objs with - unique ID's, image data from Wikipedia API if any
 	getWikiData = async (data) => {
 		let tempArr = [];
 
@@ -205,22 +208,27 @@ class Search extends React.Component {
 		return tempArr;
 	};
 
+	// Notify parent component of new card content
+	// contentType = 'loading' || 'search' || 'tweets' (used for UX messaging)
 	updateContent(contentArr, contentType) {
-		// Notify parent component of new card content
 		this.props.onSearch(contentArr, contentType);
 	}
 
+	// Clears card contents
 	clearContent() {
-		// Clear content (ie. cards)
 		this.updateContent([], 'clear');
 	}
+
+	// Notify parent component of loading event
 	loadingContent() {
-		// Clear content (ie. cards)
 		this.updateContent([], 'loading');
 	}
 
 	render() {
 		let { value, suggestions } = this.state;
+
+		// Required by Autosuggest
+		// type=search is optional, defaults to type=text
 		const inputProps = {
 			placeholder: 'or search any topic on Wikipedia ...',
 			value,
@@ -238,8 +246,8 @@ class Search extends React.Component {
 						suggestions={suggestions}
 						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-						getSuggestionValue={this.handleSuggestion}
 						onSuggestionSelected={this.onSuggestionSelected}
+						getSuggestionValue={handleSuggestion}
 						renderSuggestion={renderSuggestion}
 						inputProps={inputProps}
 					/>
