@@ -92,6 +92,7 @@ class WikiTweets extends React.Component {
 		super(props);
 
 		this.state = {
+			tempBtnState: 'on', // TEMP BUTTON TESTING
 			locationID: 1,
 			locationName: ''
 		};
@@ -105,8 +106,15 @@ class WikiTweets extends React.Component {
 	// Handle Tweet-to-Wiki button click
 	handleClick(e, loadingDone) {
 		e.preventDefault();
-		this.pauseInput(loadingDone);
-		this.getData(this.state.locationID);
+
+		// TEMP BUTTON TESTING
+		this.setState({
+			tempBtnState: !this.state.tempBtnState
+		});
+
+		// Prevent button click events while loading
+		// this.pauseInput(loadingDone);
+		// this.getData(this.state.locationID);
 	}
 
 	// Pause/Unpause button input while waiting for Async results to load
@@ -137,10 +145,22 @@ class WikiTweets extends React.Component {
 	render(props) {
 		let { loadingDone } = this.props;
 
-		console.log('<WikiTweets> props.loadingDone: ', loadingDone);
-
+		// Default button styling and msg
 		let btnClassList = 'main-button';
-		if (!loadingDone) btnClassList = 'main-button--inactive';
+		let msg = 'Get Wikipedia results of the Top Trending Tweets for';
+
+		// Modified button styling and msg while loading
+		// if (!loadingDone) {
+		// 	btnClassList += ' main-button--inactive';
+		// 	// msg = 'Loading results for';
+		// }
+
+		// TEMP BUTTON TESTING
+		// console.log('this.state.tempBtnState: ', this.state.tempBtnState);
+		if (!this.state.tempBtnState) {
+			btnClassList += ' main-button--inactive';
+			// msg = 'Loading results for';
+		}
 
 		return (
 			<div className="wiki-tweets-wrapper">
@@ -151,7 +171,7 @@ class WikiTweets extends React.Component {
 						this.handleClick(e, loadingDone);
 					}}
 				>
-					Get Wikipedia results of the Top Trending Tweets for<br />
+					{msg} <br />
 					<span id="cityName">{this.state.locationName}</span>
 				</button>
 				<Location onLocSelection={this.handleLocSelection} />

@@ -14,23 +14,30 @@
 	text-align: center;
 	// column-gap: 2px;
 }
-/* Masonry on large screens */
-@media only screen and (min-width: 1024px) {
+
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Masonry on small screens
+@media only screen and (max-width: 600px) {
 	.masonry {
-		column-count: 4;
+		column-count: 2;
 	}
 }
-
-/* Masonry on medium-sized screens */
-@media only screen and (max-width: 1023px) and (min-width: 768px) {
+// Masonry on small screens in landscape orientation
+@media only screen and (orientation: landscape) {
 	.masonry {
 		column-count: 3;
 	}
 }
-
-/* Masonry on small screens */
-@media only screen and (max-width: 767px) and (min-width: 540px) {
+// Masonry on med screens in landscape orientation
+@media only screen and (max-width: 700px) and (orientation: landscape) {
 	.masonry {
-		column-count: 2;
+		column-count: 4;
+	}
+}
+// Masonry on large screens
+@media only screen and (min-width: 1200px) {
+	.masonry {
+		column-count: 4;
 	}
 }

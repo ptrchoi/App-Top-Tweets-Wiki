@@ -59,61 +59,62 @@ const LOCATIONS = [
 	},
 	{
 		id: 'input7',
-		cityAbb: 'MEX',
-		cityFull: 'Mexico City, Mexico',
-		WOEID: '116545',
-		flagImg: imgMX
-	},
-	{
-		id: 'input8',
 		cityAbb: 'RIO',
 		cityFull: 'Rio de Janeiro, Brazil',
 		WOEID: '455825',
 		flagImg: imgBR
 	},
 	{
-		id: 'input9',
+		id: 'input8',
 		cityAbb: 'LON',
 		cityFull: 'London, England',
 		WOEID: '44418',
 		flagImg: imgGB
 	},
 	{
-		id: 'input10',
-		cityAbb: 'AMS',
-		cityFull: 'Amsterdam, Netherlands',
-		WOEID: '727232',
-		flagImg: imgNE
-	},
-	{
-		id: 'input11',
+		id: 'input9',
 		cityAbb: 'BER',
 		cityFull: 'Berlin, Germany',
 		WOEID: '638242',
 		flagImg: imgDE
 	},
 	{
-		id: 'input12',
+		id: 'input10',
 		cityAbb: 'PAR',
 		cityFull: 'Paris, France',
 		WOEID: '615702',
 		flagImg: imgFR
 	},
 	{
-		id: 'input13',
+		id: 'input11',
 		cityAbb: 'MAD',
 		cityFull: 'Madrid, Spain',
 		WOEID: '766273',
 		flagImg: imgES
 	},
 	{
-		id: 'input14',
+		id: 'input12',
 		cityAbb: 'ROM',
 		cityFull: 'Rome, Italy',
 		WOEID: '721943',
 		flagImg: imgIT
 	}
 ];
+// REMOVED Locations
+// {
+// 	id: 'input7',
+// 	cityAbb: 'MEX',
+// 	cityFull: 'Mexico City, Mexico',
+// 	WOEID: '116545',
+// 	flagImg: imgMX
+// },
+// {
+// 	id: 'input10',
+// 	cityAbb: 'AMS',
+// 	cityFull: 'Amsterdam, Netherlands',
+// 	WOEID: '727232',
+// 	flagImg: imgNE
+// },
 
 const getCityNameForID = (id) => {
 	return LOCATIONS.find((item) => {

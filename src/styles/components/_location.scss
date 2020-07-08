@@ -1,7 +1,7 @@
 .location-wrapper {
 	// border: solid 1px orange;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	// margin-top: 2px;
 	row-gap: 10px;
@@ -11,6 +11,7 @@
 	align-items: center;
 	flex-direction: column;
 	display: flex;
+	margin: 6px;
 }
 .flag-wrapper {
 	align-items: center;
@@ -18,12 +19,11 @@
 	flex-direction: column;
 	font-size: .8rem;
 	height: 70px;
+	padding: 6px;
 	width: 70px;
 }
 .flag-image {
 	margin: 6px;
-	// height: 16px;
-	// width: 16px;
 }
 /* HIDE RADIO */
 [type=radio] {
@@ -33,7 +33,9 @@
 	height: 0;
 }
 [type=radio] + label {
-	color: rgb(155, 155, 155);
+	border-radius: 40px;
+	box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.2), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
+	color: rgb(189, 189, 189);
 }
 /* IMAGE STYLES */
 [type=radio] + label > img {
@@ -43,16 +45,48 @@
 }
 /* CHECKED STYLES */
 [type=radio]:checked + label {
-	color: #38a1f3;
-	font-size: 1.1rem;
+	border-radius: 40px;
+	box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.3), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+	// color: #38a1f3;
+	color: black;
 	font-weight: bolder;
-	// text-decoration: underline;
 }
 [type=radio]:checked + label > img {
-	height: 26px;
-	width: 26px;
+	// height: 20px;
+	// width: 20px;
 	// border: solid 1px #38a1f3;
 	// border: solid 1px black;
-	border-radius: 60px;
-	box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.5), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
+	// border-radius: 60px;
+	// box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.5), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Button layout on small screens
+@media only screen and (max-width: 600px) {
+	.location-wrapper {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr;
+	}
+}
+// Button layout on small screens in landscape orientation
+@media only screen and (orientation: landscape) {
+	.location-wrapper {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+}
+// Button layout on med screens in landscape orientation
+@media only screen and (max-width: 700px) and (orientation: landscape) {
+	.location-wrapper {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+}
+// Button layout on large screens
+@media only screen and (min-width: 1200px) {
+	.location-wrapper {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
 }
