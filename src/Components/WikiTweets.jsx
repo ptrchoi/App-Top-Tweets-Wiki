@@ -125,8 +125,8 @@ class WikiTweets extends React.Component {
 
 	// Handle location updates from <Location> component
 	handleLocSelection(locationID, locationName) {
-		console.log('handleLocSelection() - locationID: ', locationID);
-		console.log('handleLocSelection() - locationName: ', locationName);
+		// console.log('handleLocSelection() - locationID: ', locationID);
+		// console.log('handleLocSelection() - locationName: ', locationName);
 		this.setState({
 			locationID: locationID,
 			locationName: locationName
