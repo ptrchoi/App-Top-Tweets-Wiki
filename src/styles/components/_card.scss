@@ -5,7 +5,7 @@
 	border-radius: 10px;
 	box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
 	color: gray;
-	font-size: .8rem;
+	// font-size: .8rem;
 	text-align: center;
 
 	a {
@@ -29,4 +29,31 @@
 	margin: 10px 0;
 	max-width: 300px;
 	width: 100%;
+}
+
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Button layout on large screens
+@media only screen and (min-width: 900px) {
+	.card-wrapper {
+		font-size: .7rem;
+	}
+}
+// Button layout on medium screens
+@media only screen and (max-width: 899px) {
+	.card-wrapper {
+		font-size: .6rem;
+	}
+}
+// Button layout on small screens
+@media only screen and (max-width: 600px) {
+	.card-wrapper {
+		font-size: .5rem;
+	}
+}
+// Button layout in landscape orientation
+@media only screen and (orientation: landscape) {
+	.card-wrapper {
+		font-size: .7rem;
+	}
 }

@@ -1,10 +1,30 @@
 .header-wrapper {
 	align-items: center;
-	// border: solid 1px red;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 .logoImg {
 	width: 12rem;
+}
+
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Button layout on small screens
+@media only screen and (max-width: 600px) {
+	h1 {
+		font-size: 1.7rem;
+	}
+	.logoImg {
+		width: 10rem;
+	}
+}
+// Button layout in landscape orientation
+@media only screen and (orientation: landscape) {
+	h1 {
+		font-size: 2rem;
+	}
+	.logoImg {
+		width: 12rem;
+	}
 }

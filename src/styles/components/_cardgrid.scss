@@ -1,6 +1,5 @@
 .cardgrid-title {
 	color: #38a1f3;
-	font-size: 1.4rem;
 	padding-top: 20px;
 	text-align: center;
 }
@@ -14,30 +13,41 @@
 	text-align: center;
 	// column-gap: 2px;
 }
-
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
-// Masonry on small screens
+// Button layout on large screens
+@media only screen and (min-width: 900px) {
+	.masonry {
+		column-count: 4;
+	}
+	.cardgrid-title {
+		font-size: 1.2rem;
+	}
+}
+// Button layout on medium screens
+@media only screen and (max-width: 899px) {
+	.masonry {
+		column-count: 3;
+	}
+	.cardgrid-title {
+		font-size: 1rem;
+	}
+}
+// Button layout on small screens
 @media only screen and (max-width: 600px) {
 	.masonry {
 		column-count: 2;
 	}
+	.cardgrid-title {
+		font-size: .7rem;
+	}
 }
-// Masonry on small screens in landscape orientation
+// Button layout in landscape orientation
 @media only screen and (orientation: landscape) {
 	.masonry {
-		column-count: 3;
-	}
-}
-// Masonry on med screens in landscape orientation
-@media only screen and (max-width: 700px) and (orientation: landscape) {
-	.masonry {
 		column-count: 4;
 	}
-}
-// Masonry on large screens
-@media only screen and (min-width: 1200px) {
-	.masonry {
-		column-count: 4;
+	.cardgrid-title {
+		font-size: 1.2rem;
 	}
 }
