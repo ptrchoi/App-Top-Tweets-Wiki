@@ -31,41 +31,34 @@
 /* Styling for the Autosuggest elements (ie. react-autosuggest__)
 ---------------------------------------------------------------------*/
 .react-autosuggest__container {
-	// border: solid 1px green;
 	width: 100%;
 }
 .react-autosuggest__input {
-	// border: solid 1px gray;
 	border: none;
-	// border-radius: 60px;
 	box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
 	color: gray;
 	font-size: 12px;
 	font-style: italic;
-	padding: 10px;
-	width: 90%;
-
-	position: absolute;
 	left: 30px;
+	padding: 10px;
+	position: absolute;
+	width: 90%;
 }
 
 .react-autosuggest__suggestions-list {
+	border: solid 1px #aaaaaa;
 	color: gray;
+	font-size: 12px;
 	font-style: italic;
+	left: 30px;
 	list-style-type: none;
 	margin: 0;
-	// padding: 2px;
 	padding: 0;
-	width: 90%;
-
-	border: solid 1px #aaaaaa;
-
 	position: absolute;
-	left: 30px;
-	top: 40px;
+	top: 30px;
+	width: 90%;
 }
 .react-autosuggest__suggestion--highlighted {
-	// color: #38a1f3;
 	color: red;
 }
 /* General styling applied last
@@ -73,5 +66,27 @@
 .centered-h {
 	margin-left: auto;
 	margin-right: auto;
-	// width: 50%;
+}
+
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Button layout on small screens
+@media only screen and (max-width: 600px) {
+	.search-icon {
+		font-size: 1.2rem;
+	}
+	.react-autosuggest__input,
+	.react-autosuggest__suggestions-list {
+		font-size: 9px;
+	}
+}
+// Button layout in landscape orientation
+@media only screen and (orientation: landscape) {
+	.search-icon {
+		font-size: 1.5rem;
+	}
+	.react-autosuggest__input,
+	.react-autosuggest__suggestions-list {
+		font-size: 12px;
+	}
 }
