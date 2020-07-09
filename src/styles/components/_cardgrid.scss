@@ -4,21 +4,19 @@
 	text-align: center;
 }
 .cardgrid-wrapper {
-	padding: 40px 20px;
+	padding: 20px;
 }
 .masonry {
-	/* Masonry container */
 	margin: 2px auto;
 	max-width: 1000px;
 	text-align: center;
-	// column-gap: 2px;
 }
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
 // Button layout on large screens
 @media only screen and (min-width: 900px) {
 	.masonry {
-		column-count: 4;
+		column-count: 3;
 	}
 	.cardgrid-title {
 		font-size: 1.2rem;
@@ -27,7 +25,7 @@
 // Button layout on medium screens
 @media only screen and (max-width: 899px) {
 	.masonry {
-		column-count: 3;
+		column-count: 2;
 	}
 	.cardgrid-title {
 		font-size: 1rem;
@@ -36,7 +34,7 @@
 // Button layout on small screens
 @media only screen and (max-width: 600px) {
 	.masonry {
-		column-count: 2;
+		column-count: 1;
 	}
 	.cardgrid-title {
 		font-size: .7rem;
@@ -45,7 +43,7 @@
 // Button layout in landscape orientation
 @media only screen and (orientation: landscape) {
 	.masonry {
-		column-count: 4;
+		column-count: 3;
 	}
 	.cardgrid-title {
 		font-size: 1.2rem;
