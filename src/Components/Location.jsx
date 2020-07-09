@@ -154,7 +154,7 @@ class Location extends React.Component {
 		let renderButtons = () => {
 			return LOCATIONS.map((location) => {
 				return (
-					<div key={location.WOEID} className="selection-wrapper">
+					<div key={location.WOEID}>
 						<input
 							id={location.id}
 							type="radio"
@@ -163,7 +163,7 @@ class Location extends React.Component {
 							onChange={this.handleChange}
 							checked={selectedWOEID === location.WOEID}
 						/>
-						<label htmlFor={location.id} className="flag-wrapper">
+						<label htmlFor={location.id} className="button-wrapper">
 							<img className="flag-image" src={location.flagImg} />
 							{location.cityAbb}
 						</label>
@@ -173,7 +173,7 @@ class Location extends React.Component {
 		};
 
 		// Return the final rendered array of divs
-		return <div className="location-wrapper">{renderButtons()}</div>;
+		return <div className="location-container">{renderButtons()}</div>;
 	}
 }
 
