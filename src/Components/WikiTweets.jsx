@@ -5,7 +5,7 @@ import $ from 'jquery';
 // Modules
 import Location from './Location';
 
-/* Functions
+/* Local Functions
 ------------------------------------------------------*/
 // The splice() method changes the content of a string by removing a range of characters and/or adding new characters.
 if (!String.prototype.splice) {
@@ -92,7 +92,6 @@ class WikiTweets extends React.Component {
 		super(props);
 
 		this.state = {
-			// tempBtnState: 'on', // TEMP BUTTON TESTING
 			locationID: 1,
 			locationName: ''
 		};
@@ -110,24 +109,15 @@ class WikiTweets extends React.Component {
 		// Prevent button click events while loading
 		this.pauseInput(tweetsReady);
 		this.getData(this.state.locationID);
-
-		// // TEMP BUTTON TESTING
-		// this.props.onTweetSearch([]);
-		// this.setState({
-		// 	tempBtnState: !this.state.tempBtnState
-		// });
 	}
 
 	// Disable/Enable button input while waiting for Async results to load
 	pauseInput(pause) {
-		// console.log('pauseInput() - pause: ', pause);
 		$('#twitterButton').prop('disabled', pause);
 	}
 
 	// Handle location updates from <Location> component
 	handleLocSelection(locationID, locationName) {
-		// console.log('handleLocSelection() - locationID: ', locationID);
-		// console.log('handleLocSelection() - locationName: ', locationName);
 		this.setState({
 			locationID: locationID,
 			locationName: locationName
@@ -146,22 +136,14 @@ class WikiTweets extends React.Component {
 	render(props) {
 		let { tweetsReady } = this.props;
 
-		// Default button styling and msg
+		// Default button class styling and msg
 		let btnClassList = 'main-button';
 		let msg = 'Get Wikipedia results of the Top Trending Tweets for';
 
-		// Modified button styling and msg while loading
+		// Modified button class styling and msg (while loading)
 		if (!tweetsReady) {
 			btnClassList += ' main-button--inactive';
 		}
-
-		// // TEMP BUTTON TESTING
-		// if (!this.state.tempBtnState) {
-		// 	btnClassList += ' main-button--inactive';
-		// } else {
-		// 	btnClassList = 'main-button';
-		// }
-
 		return (
 			<div className="wiki-tweets-wrapper">
 				<button

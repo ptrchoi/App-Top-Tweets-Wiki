@@ -126,7 +126,7 @@ class Location extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedWOEID: LOCATIONS[0].WOEID // default to first entry = S.F.
+			selectedWOEID: LOCATIONS[0].WOEID // initialize location to S.F.
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -134,7 +134,7 @@ class Location extends React.Component {
 	componentDidMount() {
 		const defaultID = this.state.selectedWOEID;
 		// Notify parent of initial default location
-		this.props.onLocSelection(defaultID, getCityNameForID(defaultID)); // default to first entry = S.F.
+		this.props.onLocSelection(defaultID, getCityNameForID(defaultID)); // initialize location to S.F.
 	}
 	handleChange(e) {
 		let selectedWOEID = e.target.value;

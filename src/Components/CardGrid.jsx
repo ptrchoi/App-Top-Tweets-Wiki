@@ -1,3 +1,4 @@
+// Libs
 import React from 'react';
 
 // Components
@@ -6,11 +7,12 @@ import Card from './Card';
 function CardGrid(props) {
 	let { cardCount, cardContent, contentType } = props;
 
+	// Banner/title content assigned based on content updates sent from Parent
+	// contentTypes = 'clear' || 'loading' || 'search' || 'tweets'
+	// If loading, add classes for animations
 	let title = '';
 	let spinnerClass = 'spinning-anim';
 	let titleClass = 'title';
-
-	// console.log('<Cardgrid > contentType: ', contentType);
 
 	if (contentType === 'search') title = 'Search Results Found on Wikipedia';
 	else if (contentType === 'tweets') title = 'Top Trending Tweet Topics Found on Wikipedia';
@@ -22,7 +24,7 @@ function CardGrid(props) {
 
 	return (
 		<div className="cardgrid-container">
-			<div className="cardgrid-banner">
+			<div className="cardgrid-header">
 				<div className={spinnerClass} />
 				<div className={titleClass}>{title}</div>
 			</div>

@@ -7,12 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 // Modules
 import WikiTweets from './WikiTweets';
 
+// Constants
 const MAX_CARDS = 50;
 const MAX_SUGGESTIONS = 5;
 
-/* Functions and API calls
+/* Local Functions
 ---------------------------------------------------*/
-
 // Get search suggestion results for typed input from Wikipedia API
 function getWikiSuggestions(input) {
 	const wikiUrl =
@@ -163,7 +163,6 @@ class Search extends React.Component {
 
 	// Handles Tweet-to-Wiki search event from child <WikiTweets />
 	handleTweetSearch(tweetsArr) {
-		// console.log('<Search > handleTweetSearch()');
 		// Set flag to prevent repeated twitter API calls
 		this.setState({
 			tweetsReady: false

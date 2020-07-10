@@ -1,5 +1,7 @@
+// Libs
 import React from 'react';
 
+// Consts
 const cardImg = require('../images/cardImage.png');
 
 function Header(props) {

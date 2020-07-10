@@ -26,7 +26,8 @@ class App extends React.Component {
 
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
 	}
-	// Pass content updates from Inputs>Search comp to CardGrid comp
+
+	// Content updates from Inputs>Search component (passed to CardGrid component)
 	handleSearchUpdate(contentArr, contentType) {
 		this.setState({
 			cardCount: contentArr.length,
@@ -34,6 +35,7 @@ class App extends React.Component {
 			contentType: contentType
 		});
 	}
+
 	render() {
 		const { cardCount, cardContent, contentType } = this.state;
 		return (

@@ -1,12 +1,9 @@
+// Libs
 import React from 'react';
 
-// Need to require the image for Parcel to pre-load in the bundler
-// const cardImg = require('../images/cardImage.png');
-
+// 'map' through card array returning card obj content formatted in card layout/class styling
 function Card(props) {
 	let { cards } = props;
-
-	// console.log('<Card /> cards: ', cards);
 
 	let renderCards = () => {
 		return cards.map((card) => {
@@ -15,7 +12,7 @@ function Card(props) {
 				imageClassList = imageClassList + ' hide-image';
 			}
 			return (
-				<div key={card.id} className="card-wrapper masonry-brick">
+				<div key={card.id} className="card-wrapper masonry-item">
 					<a href={card.url} target="_blank">
 						<img className={imageClassList} src={card.imgSrc} alt="title image" />
 						<h2>
