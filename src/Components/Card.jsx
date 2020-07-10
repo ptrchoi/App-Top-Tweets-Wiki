@@ -18,7 +18,10 @@ function Card(props) {
 				<div key={card.id} className="card-wrapper masonry-brick">
 					<a href={card.url} target="_blank">
 						<img className={imageClassList} src={card.imgSrc} alt="title image" />
-						<h2>{card.title}</h2>
+						<h2>
+							{card.title}
+							<i className="fas fa-external-link-alt link-icon" />
+						</h2>
 					</a>
 				</div>
 			);
