@@ -163,6 +163,7 @@ class Search extends React.Component {
 
 	// Handles Tweet-to-Wiki search event from child <WikiTweets />
 	handleTweetSearch(tweetsArr) {
+		// console.log('<Search > handleTweetSearch()');
 		// Set flag to prevent repeated twitter API calls
 		this.setState({
 			tweetsReady: false

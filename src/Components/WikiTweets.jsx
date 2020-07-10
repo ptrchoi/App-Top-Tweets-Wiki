@@ -107,14 +107,15 @@ class WikiTweets extends React.Component {
 	handleClick(e, tweetsReady) {
 		e.preventDefault();
 
-		// TEMP BUTTON TESTING
-		// this.setState({
-		// 	tempBtnState: !this.state.tempBtnState
-		// });
-
 		// Prevent button click events while loading
 		this.pauseInput(tweetsReady);
 		this.getData(this.state.locationID);
+
+		// // TEMP BUTTON TESTING
+		// this.props.onTweetSearch([]);
+		// this.setState({
+		// 	tempBtnState: !this.state.tempBtnState
+		// });
 	}
 
 	// Disable/Enable button input while waiting for Async results to load
@@ -154,10 +155,11 @@ class WikiTweets extends React.Component {
 			btnClassList += ' main-button--inactive';
 		}
 
-		// TEMP BUTTON TESTING
-		// console.log('this.state.tempBtnState: ', this.state.tempBtnState);
+		// // TEMP BUTTON TESTING
 		// if (!this.state.tempBtnState) {
 		// 	btnClassList += ' main-button--inactive';
+		// } else {
+		// 	btnClassList = 'main-button';
 		// }
 
 		return (
