@@ -106,7 +106,7 @@ class Search extends React.Component {
 		this.state = {
 			value: '',
 			suggestions: [],
-			loadingDone: true
+			tweetsReady: true
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -163,8 +163,13 @@ class Search extends React.Component {
 
 	// Handles Tweet-to-Wiki search event from child <WikiTweets />
 	handleTweetSearch(tweetsArr) {
+		// Set flag to prevent repeated twitter API calls
+		this.setState({
+			tweetsReady: false
+		});
+
 		this.clearContent();
-		this.loadingContent(); //Notify parent contentType='loading'
+		this.loadingContent();
 		this.tweetsToWikiSearch(tweetsArr); //Get Wikipedia results for given tweetsArr
 	}
 
@@ -210,20 +215,14 @@ class Search extends React.Component {
 	};
 
 	// Notify parent component of new card content
-	// contentType = 'loading' || 'search' || 'tweets' (used for UX messaging)
+	// contentType = 'clear' || 'loading' || 'search' || 'tweets'
 	updateContent(contentArr, contentType) {
 		this.props.onSearch(contentArr, contentType);
 
-		// Update loading status based on updateContent event types
-		if (contentType === 'clear') {
-			console.log('updateContent() setting loading done to false - contentType: ', contentType);
+		// Update 'tweetsReady' status to re-enable Wiki-tweet button
+		if (contentType === 'tweets') {
 			this.setState({
-				loadingDone: false
-			});
-		} else if (contentType === 'search' || contentType === 'tweets') {
-			console.log('updateContent() setting loading done to true - contentType: ', contentType);
-			this.setState({
-				loadingDone: true
+				tweetsReady: true
 			});
 		}
 	}
@@ -252,7 +251,7 @@ class Search extends React.Component {
 
 		return (
 			<div className="inputs-wrapper">
-				<WikiTweets onTweetSearch={this.handleTweetSearch} loadingDone={this.state.loadingDone} />
+				<WikiTweets onTweetSearch={this.handleTweetSearch} tweetsReady={this.state.tweetsReady} />
 
 				<div className="search-wrapper centered-h">
 					<i className="fas fa-search search-icon" />

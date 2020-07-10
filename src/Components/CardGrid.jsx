@@ -9,7 +9,7 @@ function CardGrid(props) {
 	let title = '';
 
 	if (contentType === 'search') title = 'Search Results Found on Wikipedia...';
-	else if (contentType === 'tweets') title = 'Top Trending Tweets with entries Found on Wikipedia...';
+	else if (contentType === 'tweets') title = 'Top Trending Tweet topics found on Wikipedia...';
 	else if (contentType === 'loading') title = 'Loading results...';
 
 	return (

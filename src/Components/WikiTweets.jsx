@@ -92,7 +92,7 @@ class WikiTweets extends React.Component {
 		super(props);
 
 		this.state = {
-			tempBtnState: 'on', // TEMP BUTTON TESTING
+			// tempBtnState: 'on', // TEMP BUTTON TESTING
 			locationID: 1,
 			locationName: ''
 		};
@@ -104,22 +104,22 @@ class WikiTweets extends React.Component {
 	}
 
 	// Handle Tweet-to-Wiki button click
-	handleClick(e, loadingDone) {
+	handleClick(e, tweetsReady) {
 		e.preventDefault();
 
 		// TEMP BUTTON TESTING
-		this.setState({
-			tempBtnState: !this.state.tempBtnState
-		});
+		// this.setState({
+		// 	tempBtnState: !this.state.tempBtnState
+		// });
 
 		// Prevent button click events while loading
-		// this.pauseInput(loadingDone);
-		// this.getData(this.state.locationID);
+		this.pauseInput(tweetsReady);
+		this.getData(this.state.locationID);
 	}
 
-	// Pause/Unpause button input while waiting for Async results to load
+	// Disable/Enable button input while waiting for Async results to load
 	pauseInput(pause) {
-		console.log('pauseInput() - pause: ', pause);
+		// console.log('pauseInput() - pause: ', pause);
 		$('#twitterButton').prop('disabled', pause);
 	}
 
@@ -143,24 +143,22 @@ class WikiTweets extends React.Component {
 	};
 
 	render(props) {
-		let { loadingDone } = this.props;
+		let { tweetsReady } = this.props;
 
 		// Default button styling and msg
 		let btnClassList = 'main-button';
 		let msg = 'Get Wikipedia results of the Top Trending Tweets for';
 
 		// Modified button styling and msg while loading
-		// if (!loadingDone) {
-		// 	btnClassList += ' main-button--inactive';
-		// 	// msg = 'Loading results for';
-		// }
+		if (!tweetsReady) {
+			btnClassList += ' main-button--inactive';
+		}
 
 		// TEMP BUTTON TESTING
 		// console.log('this.state.tempBtnState: ', this.state.tempBtnState);
-		if (!this.state.tempBtnState) {
-			btnClassList += ' main-button--inactive';
-			// msg = 'Loading results for';
-		}
+		// if (!this.state.tempBtnState) {
+		// 	btnClassList += ' main-button--inactive';
+		// }
 
 		return (
 			<div className="wiki-tweets-wrapper">
@@ -168,7 +166,7 @@ class WikiTweets extends React.Component {
 					id="twitterButton"
 					className={btnClassList}
 					onClick={(e) => {
-						this.handleClick(e, loadingDone);
+						this.handleClick(e, tweetsReady);
 					}}
 				>
 					{msg} <br />
