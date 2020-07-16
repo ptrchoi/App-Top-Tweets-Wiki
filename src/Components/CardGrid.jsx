@@ -5,7 +5,7 @@ import React from 'react';
 import Card from './Card';
 
 function CardGrid(props) {
-	let { cardCount, cardContent, contentType } = props;
+	let { cardContent, contentType } = props;
 
 	// Banner/title content assigned based on content updates sent from Parent
 	// contentTypes = 'clear' || 'loading' || 'search' || 'tweets'
