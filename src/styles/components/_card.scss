@@ -18,13 +18,14 @@
 	border-radius: 10px;
 	width: 90%;
 }
-.hide-image {
-	display: none;
-}
 .link-icon {
+	display: inline-block;
 	color: #38a2f3c2;
-	font-size: .85rem;
-	margin-left: 12px;
+	font-size: 1rem;
+	margin: 2px 12px 10px 12px;
+}
+.hide {
+	display: none;
 }
 .masonry-item {
 	display: inline-block;

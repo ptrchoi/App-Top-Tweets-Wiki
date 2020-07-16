@@ -156,7 +156,7 @@ class Search extends React.Component {
 		this.clearContent();
 		this.loadingContent(); //Notify parent contentType='loading'
 		const searchResults = await getWikiSearchResults(suggestion, MAX_CARDS);
-		const wikiData = await this.getWikiData(searchResults);
+		const wikiData = await this.getWikiData(searchResults, '');
 
 		this.updateContent(wikiData, 'search'); //Notify parent contentType='search'
 	};
@@ -179,20 +179,20 @@ class Search extends React.Component {
 
 		// Search for wiki results for each tweet in the tweetsArr
 		for (let j = 0; j < tweetsArr.length; j++) {
-			const searchResult = await getWikiSearchResults(tweetsArr[j], 1);
+			const searchResult = await getWikiSearchResults(tweetsArr[j].title, 1);
 
 			// Check if there are any Wikipedia results for the title.
 			// If so, get associated data and wiki image, and add data object to array
 			if (searchResult[3].length > 0) {
-				const wikiData = await this.getWikiData(searchResult);
+				const wikiData = await this.getWikiData(searchResult, tweetsArr[j].url);
 				wikiDataForTweets.push(wikiData[0]);
 			}
 		}
 		this.updateContent(wikiDataForTweets, 'tweets');
 	};
 
-	// Returns array of formatted Wiki data objs with - unique ID's, image data from Wikipedia API if any
-	getWikiData = async (data) => {
+	// Returns array of formatted Wiki data objs with - unique ID's, image data from Wikipedia API if any, and twitterLink if called by twitter data handler (default is empty string)
+	getWikiData = async (data, twitterLink = '') => {
 		let tempArr = [];
 
 		// data[1] is the index for the resulting search titles
@@ -204,7 +204,8 @@ class Search extends React.Component {
 				title: title,
 				imgSrc: '',
 				text: '',
-				url: data[3][i]
+				wikiUrl: data[3][i],
+				twitUrl: twitterLink
 			};
 
 			const imgData = await getWikiImg(title);

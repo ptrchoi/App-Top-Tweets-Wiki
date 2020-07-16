@@ -44,9 +44,10 @@ function getTrendingOnTwitter(locationID) {
 	});
 }
 
-// Clean Twitter data up
+// Grab relevant Twitter data and clean it up
 // 	- Remove leading #
 //	- Add space to Mixed case strings (ie. BlackLivesMatter => Black Lives Matter)
+//  - Get associated URL
 function fixTwitterData(data) {
 	let cleanedData = [];
 	let rawTweets = data[0].trends;
@@ -54,6 +55,7 @@ function fixTwitterData(data) {
 	//Clean up twitter results
 	for (let i = 0; i < rawTweets.length; i++) {
 		let titleOnly = rawTweets[i].name;
+		let url = rawTweets[i].url; // Twitter url associated to title
 
 		// Remove any leading hashtag
 		if (titleOnly[0] === '#') {
@@ -80,7 +82,10 @@ function fixTwitterData(data) {
 				titleOnly = titleOnly.splice(k + 1, 0, ' ');
 			}
 		}
-		cleanedData[i] = titleOnly;
+		cleanedData[i] = {
+			title: titleOnly,
+			url: url
+		};
 	}
 	return cleanedData;
 }
@@ -138,7 +143,7 @@ class WikiTweets extends React.Component {
 
 		// Default button class styling and msg
 		let btnClassList = 'main-button';
-		let msg = 'Get Wikipedia results of the Top Trending Tweets for';
+		let msg = 'Get Wikipedia results for Top Trending Tweets in';
 
 		// Modified button class styling and msg (while loading)
 		if (!tweetsReady) {
