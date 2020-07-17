@@ -154,7 +154,7 @@ class Search extends React.Component {
 	// Async API calls to collect and format data => updates content to pass to parent with contentType='search'
 	suggestionToWikiSearch = async (suggestion) => {
 		this.clearContent();
-		this.loadingContent(); //Notify parent contentType='loading'
+		this.loadingContent('wiki'); //Notify parent contentType='loading'
 		const searchResults = await getWikiSearchResults(suggestion, MAX_CARDS);
 		const wikiData = await this.getWikiData(searchResults, '');
 
@@ -169,7 +169,7 @@ class Search extends React.Component {
 		});
 
 		this.clearContent();
-		this.loadingContent();
+		this.loadingContent('twit');
 		this.tweetsToWikiSearch(tweetsArr); //Get Wikipedia results for given tweetsArr
 	}
 
@@ -179,13 +179,24 @@ class Search extends React.Component {
 
 		// Search for wiki results for each tweet in the tweetsArr
 		for (let j = 0; j < tweetsArr.length; j++) {
+			// Check if there are any Wikipedia results for the title.
 			const searchResult = await getWikiSearchResults(tweetsArr[j].title, 1);
 
-			// Check if there are any Wikipedia results for the title.
-			// If so, get associated data and wiki image, and add data object to array
+			// If Wikipedia result found, get associated data and wiki image, then add data object to array;
+			// Else, add Twitter data and empty Wiki data to obj, then add data object to array.
 			if (searchResult[3].length > 0) {
 				const wikiData = await this.getWikiData(searchResult, tweetsArr[j].url);
 				wikiDataForTweets.push(wikiData[0]);
+			} else {
+				const twitDataOnly = {
+					id: uuidv4(),
+					title: tweetsArr[j].title,
+					imgSrc: '',
+					text: '',
+					wikiUrl: '',
+					twitUrl: tweetsArr[j].url
+				};
+				wikiDataForTweets.push(twitDataOnly);
 			}
 		}
 		this.updateContent(wikiDataForTweets, 'tweets');
@@ -233,9 +244,13 @@ class Search extends React.Component {
 		this.updateContent([], 'clear');
 	}
 
-	// Notify parent component of loading event
-	loadingContent() {
-		this.updateContent([], 'loading');
+	// Notify parent component of loading event with content type
+	loadingContent(loadingType) {
+		let loadingContent = 'loadingWiki';
+
+		if (loadingType === 'twit') loadingContent = 'loadingTwit';
+
+		this.updateContent([], loadingContent);
 	}
 
 	render() {
@@ -244,7 +259,7 @@ class Search extends React.Component {
 		// Required by Autosuggest
 		// type=search is optional, defaults to type=text
 		const inputProps = {
-			placeholder: 'or search any topic on Wikipedia ...',
+			placeholder: 'or SEARCH any topic from Wikipedia ...',
 			value,
 			onChange: this.onChange,
 			type: 'search'

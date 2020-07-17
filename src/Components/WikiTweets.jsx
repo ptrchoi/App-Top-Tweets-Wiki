@@ -153,8 +153,12 @@ class WikiTweets extends React.Component {
 		return (
 			<div className="wiki-tweets-wrapper">
 				<p className="description-text">
-					Find the Top Trending Tweets and relevant Wikipedia topics for<br />
-					<span id="cityName">{this.state.locationName}</span>
+					{/* Find Top Twitter Topics + relevant Wikipedia entries trending in<br /> */}
+					Find out what's trending on <span className="text-span text-span--twit">Twitter</span> & learn more
+					about it from <span className="text-span text-span--wiki"> Wikipedia</span>.
+					<br /> <br />
+					Simply select a city and click SEARCH to view Top Tweets & Wikis.
+					{/* <span id="cityName">{this.state.locationName}</span> */}
 				</p>
 				<Location onLocSelection={this.handleLocSelection} />
 				<button
@@ -165,7 +169,7 @@ class WikiTweets extends React.Component {
 					}}
 				>
 					{msg} <br />
-					{/* <span id="cityName">{this.state.locationName}</span> */}
+					<span id="cityName">{this.state.locationName}</span>
 				</button>
 			</div>
 		);

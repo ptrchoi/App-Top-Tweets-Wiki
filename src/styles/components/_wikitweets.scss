@@ -4,19 +4,26 @@
 	flex-direction: column;
 }
 .description-text {
+	color: rgb(108, 108, 108);
 	font-size: .9rem;
 	line-height: 1.8;
 	margin-bottom: 1.8rem;
 	text-align: center;
+}
+.text-span {
+	font-weight: bold;
 }
 .main-button {
 	background-color: white;
 	border-radius: 60px;
 	box-shadow: 8px 8px 12px 3px rgba(0, 0, 0, 0.3), -6px -6px 10px 0 rgba(255, 255, 255, .3);
 	border: none;
-	color: #38a1f3;
+	// color: #38a1f3;
+	color: gray;
 	font-size: .9rem;
-	height: 2.5rem;
+	font-weight: bold;
+	height: 3.8rem;
+	line-height: 1.4;
 	margin: 1.8rem;
 	width: 50%;
 }
@@ -27,6 +34,7 @@
 }
 #cityName {
 	color: #38a1f3;
+	font-weight: normal;
 }
 button:focus {
 	outline: 0;
@@ -34,17 +42,31 @@ button:focus {
 
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
-// // Button layout on small screens
-// @media only screen and (max-width: 600px) {
-// 	.main-button {
-// 		font-size: .5rem;
-// 		height: 2.5rem;
-// 	}
-// }
-// // Button layout in landscape orientation
-// @media only screen and (orientation: landscape) {
-// 	.main-button {
-// 		font-size: .9rem;
-// 		height: 2.5rem;
-// 	}
-// }
+// Button layout on small screens
+@media only screen and (max-width: 600px) {
+	.description-text {
+		color: rgb(108, 108, 108);
+		font-size: .6rem;
+		line-height: 1.8;
+		margin-bottom: 1.8rem;
+	}
+	.main-button {
+		font-size: .5rem;
+		height: 2.5rem;
+		width: 70%;
+	}
+}
+// Button layout in landscape orientation
+@media only screen and (orientation: landscape) {
+	.description-text {
+		color: rgb(108, 108, 108);
+		font-size: .9rem;
+		line-height: 1.8;
+		margin-bottom: 1.8rem;
+	}
+	.main-button {
+		font-size: .9rem;
+		height: 3.8rem;
+		width: 50%;
+	}
+}

@@ -9,14 +9,12 @@ function Card(props) {
 		return cards.map((card) => {
 			let imageClassList = 'card-image';
 			let twitIconClassList = 'fab fa-twitter link-icon';
+			let wikiIconClassList = 'fab fa-wikipedia-w link-icon';
 
 			// Hide wiki image, twitter link icon if either has no data
-			if (card.imgSrc === '') {
-				imageClassList = imageClassList + ' hide';
-			}
-			if (card.twitUrl === '') {
-				twitIconClassList = twitIconClassList + ' hide';
-			}
+			if (card.imgSrc === '') imageClassList = imageClassList + ' hide';
+			if (card.twitUrl === '') twitIconClassList = twitIconClassList + ' hide';
+			if (card.wikiUrl === '') wikiIconClassList = wikiIconClassList + ' hide';
 
 			return (
 				<div key={card.id} className="card-wrapper masonry-item">
@@ -26,7 +24,7 @@ function Card(props) {
 						<i className={twitIconClassList} />
 					</a>
 					<a href={card.wikiUrl} target="_blank">
-						<i className="fab fa-wikipedia-w link-icon" />
+						<i className={wikiIconClassList} />
 					</a>
 				</div>
 			);

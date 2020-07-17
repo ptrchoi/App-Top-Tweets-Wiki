@@ -41,7 +41,8 @@
 // Checked button styling
 [type=radio]:checked + label {
 	box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.3), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
-	color: black;
+	color: #38a1f3;
+	font-weight: bold;
 }
 
 /* RESPONSIVE STYLING

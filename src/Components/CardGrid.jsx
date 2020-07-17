@@ -7,19 +7,31 @@ import Card from './Card';
 function CardGrid(props) {
 	let { cardContent, contentType } = props;
 
-	// Banner/title content assigned based on content updates sent from Parent
-	// contentTypes = 'clear' || 'loading' || 'search' || 'tweets'
-	// If loading, add classes for animations
+	// Update content for title text and classes (ie. show/hide, styles) for animations based on contentType updates.
+	// >>	contentTypes = 'clear' || 'loadingTwit' || 'loadingWiki' || 'search' || 'tweets'
 	let title = '';
 	let spinnerClass = 'spinning-anim';
 	let titleClass = 'title';
 
-	if (contentType === 'search') title = 'Search Results Found on Wikipedia';
-	else if (contentType === 'tweets') title = 'Top Trending Tweet Topics Found on Wikipedia';
-	else if (contentType === 'loading') {
-		title = 'Searching Wikipedia';
-		titleClass += '--animate';
-		spinnerClass += '--show';
+	switch (contentType) {
+		case 'search':
+			title = 'Search Results Found on Wikipedia';
+			break;
+		case 'tweets':
+			title = 'Topics Trending on Twitter';
+			break;
+		case 'loadingWiki':
+			title = 'Searching Wikipedia';
+			titleClass += '--animate';
+			spinnerClass += '--show';
+			break;
+		case 'loadingTwit':
+			title = 'Searching Twitter and Wikipedia';
+			titleClass += '--animate';
+			spinnerClass += '--show';
+			break;
+		default:
+			break;
 	}
 
 	return (
