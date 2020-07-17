@@ -143,7 +143,8 @@ class WikiTweets extends React.Component {
 
 		// Default button class styling and msg
 		let btnClassList = 'main-button';
-		let msg = 'Get Wikipedia results for Top Trending Tweets in';
+		// let msg = 'Get Wikipedia results for Top Trending Tweets in';
+		let msg = 'SEARCH';
 
 		// Modified button class styling and msg (while loading)
 		if (!tweetsReady) {
@@ -151,6 +152,11 @@ class WikiTweets extends React.Component {
 		}
 		return (
 			<div className="wiki-tweets-wrapper">
+				<p className="description-text">
+					Find the Top Trending Tweets and relevant Wikipedia topics for<br />
+					<span id="cityName">{this.state.locationName}</span>
+				</p>
+				<Location onLocSelection={this.handleLocSelection} />
 				<button
 					id="twitterButton"
 					className={btnClassList}
@@ -159,9 +165,8 @@ class WikiTweets extends React.Component {
 					}}
 				>
 					{msg} <br />
-					<span id="cityName">{this.state.locationName}</span>
+					{/* <span id="cityName">{this.state.locationName}</span> */}
 				</button>
-				<Location onLocSelection={this.handleLocSelection} />
 			</div>
 		);
 	}

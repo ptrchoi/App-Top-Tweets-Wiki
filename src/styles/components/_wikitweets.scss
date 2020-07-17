@@ -3,17 +3,22 @@
 	display: flex;
 	flex-direction: column;
 }
+.description-text {
+	font-size: .9rem;
+	line-height: 1.8;
+	margin-bottom: 1.8rem;
+	text-align: center;
+}
 .main-button {
 	background-color: white;
 	border-radius: 60px;
-	box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.3), -6px -6px 10px 0 rgba(255, 255, 255, 0.7);
+	box-shadow: 8px 8px 12px 3px rgba(0, 0, 0, 0.3), -6px -6px 10px 0 rgba(255, 255, 255, .3);
 	border: none;
-	color: gray;
+	color: #38a1f3;
 	font-size: .9rem;
-	height: 4.2rem;
-	line-height: 1.8;
+	height: 2.5rem;
 	margin: 1.8rem;
-	width: 100%;
+	width: 50%;
 }
 .main-button--inactive {
 	border: none;
@@ -29,17 +34,17 @@ button:focus {
 
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
-// Button layout on small screens
-@media only screen and (max-width: 600px) {
-	.main-button {
-		font-size: .5rem;
-		height: 3rem;
-	}
-}
-// Button layout in landscape orientation
-@media only screen and (orientation: landscape) {
-	.main-button {
-		font-size: .9rem;
-		height: 4.5rem;
-	}
-}
+// // Button layout on small screens
+// @media only screen and (max-width: 600px) {
+// 	.main-button {
+// 		font-size: .5rem;
+// 		height: 2.5rem;
+// 	}
+// }
+// // Button layout in landscape orientation
+// @media only screen and (orientation: landscape) {
+// 	.main-button {
+// 		font-size: .9rem;
+// 		height: 2.5rem;
+// 	}
+// }
