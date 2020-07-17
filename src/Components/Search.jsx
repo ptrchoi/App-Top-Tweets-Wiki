@@ -52,7 +52,7 @@ function getWikiSearchResults(searchStr, numOfResults = 1) {
 // Get image data related to given string from Wikipedia API
 function getWikiImg(str) {
 	const wikiImgUrl =
-		'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original|thumbnail&pithumbsize=100&pilimit=1&titles=' +
+		'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original|thumbnail&pithumbsize=600&pilimit=1&titles=' +
 		str +
 		'&callback=?';
 
