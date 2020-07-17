@@ -152,8 +152,8 @@ class WikiTweets extends React.Component {
 		return (
 			<div className="wiki-tweets-wrapper">
 				<p className="description-text">
-					Find out what's trending on <span className="text-span text-span--twit">Twitter</span> & learn more
-					about it from <span className="text-span text-span--wiki"> Wikipedia</span>.
+					Find out what's trending on <span className="text-span text-span--twit">Twitter</span> and learn
+					more about it from <span className="text-span text-span--wiki"> Wikipedia</span>.
 					<br /> <br />
 					Simply select a city and click SEARCH to view Top Tweets & Wikis.
 				</p>
