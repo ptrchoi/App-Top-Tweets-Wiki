@@ -11,7 +11,7 @@ function Card(props) {
 			let twitIconClassList = 'fab fa-twitter link-icon';
 			let wikiIconClassList = 'fab fa-wikipedia-w link-icon';
 
-			// Hide wiki image, twitter link icon if either has no data
+			// Hide elements when they have no data
 			if (card.imgSrc === '') imageClassList = imageClassList + ' hide';
 			if (card.twitUrl === '') twitIconClassList = twitIconClassList + ' hide';
 			if (card.wikiUrl === '') wikiIconClassList = wikiIconClassList + ' hide';

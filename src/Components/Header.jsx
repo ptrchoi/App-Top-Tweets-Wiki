@@ -8,7 +8,7 @@ function Header(props) {
 	return (
 		<div className="header-wrapper">
 			<h1>Top Tweets & Wikis</h1>
-			<img className="logoImg" src={cardImg} />
+			<img className="logoImg" src={cardImg} alt="app logo" />
 		</div>
 	);
 }

@@ -15,10 +15,10 @@ function CardGrid(props) {
 
 	switch (contentType) {
 		case 'search':
-			title = 'Search Results Found on Wikipedia';
+			title = 'Search Results from Wikipedia';
 			break;
 		case 'tweets':
-			title = 'Topics Trending on Twitter';
+			title = 'Trending on Twitter';
 			break;
 		case 'loadingWiki':
 			title = 'Searching Wikipedia';
