@@ -21,7 +21,7 @@ function getTrendingOnTwitter(locationID) {
 	}
 
 	const request = require('request');
-	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+	const proxyUrl = 'https://radiant-hollows-05386.herokuapp.com/'; // "Middleware" CORS solution via custom Heroku deployed server (ie. cors-anywhere.com)
 	const twitterUrl = 'https://api.twitter.com/1.1/trends/place.json?id=' + locationID;
 
 	return new Promise((resolve, reject) => {
