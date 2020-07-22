@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import ReactDOM from 'react-dom';
-import regeneratorRuntime from 'regenerator-runtime';
+import regeneratorRuntime from 'regenerator-runtime'; // Standalone runtime for Regenerator-compiled generator and async functions.
 
 // Components
 import Header from './Components/Header';
