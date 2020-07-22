@@ -159,7 +159,7 @@ class WikiTweets extends React.Component {
 					Find out what's trending on <span className="text-span text-span--twit">Twitter</span> and learn
 					more from <span className="text-span text-span--wiki"> Wikipedia</span>.
 					<br /> <br />
-					Simply select a city and click SEARCH to view Top Tweets and Wikis.
+					Simply select a city and click SEARCH to view Top Tweets and related Wikis.
 				</p>
 				<Location onLocSelection={this.handleLocSelection} />
 				<button
