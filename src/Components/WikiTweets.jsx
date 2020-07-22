@@ -113,6 +113,10 @@ class WikiTweets extends React.Component {
 
 		// Prevent button click events while loading
 		this.pauseInput(tweetsReady);
+
+		// Notify parent of ansync Twitter search started
+		this.props.onTweetSearchStart();
+
 		this.getData(this.state.locationID);
 	}
 
@@ -134,8 +138,8 @@ class WikiTweets extends React.Component {
 		const twitData = await getTrendingOnTwitter(locationID);
 		let tweets = fixTwitterData(twitData);
 
-		// Notify parent of tweet search content update
-		this.props.onTweetSearch(tweets);
+		// Notify parent of tweet search completed with content update
+		this.props.onTweetSearchDone(tweets);
 	};
 
 	render(props) {

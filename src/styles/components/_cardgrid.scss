@@ -63,8 +63,8 @@
 // Spinning loading icon
 .spinning-anim--show {
 	animation: spin 2s linear infinite;
-	border: 3px solid #f3f3f3;
-	border-top: 3px solid #38a2f3c2;
+	background-color: #fff;
+	border-top: 6px solid #38a2f3c2;
 	border-radius: 50%;
 	height: 20px;
 	margin-right: 8px;

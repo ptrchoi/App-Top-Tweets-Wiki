@@ -114,7 +114,8 @@ class Search extends React.Component {
 		this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 		this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
 		this.suggestionToWikiSearch = this.suggestionToWikiSearch.bind(this);
-		this.handleTweetSearch = this.handleTweetSearch.bind(this);
+		this.handleTweetSearchStart = this.handleTweetSearchStart.bind(this);
+		this.handleTweetSearchDone = this.handleTweetSearchDone.bind(this);
 		this.tweetsToWikiSearch = this.tweetsToWikiSearch.bind(this);
 		this.getWikiData = this.getWikiData.bind(this);
 		this.updateContent = this.updateContent.bind(this);
@@ -161,8 +162,8 @@ class Search extends React.Component {
 		this.updateContent(wikiData, 'search'); //Notify parent contentType='search'
 	};
 
-	// Handles Tweet-to-Wiki search event from child <WikiTweets />
-	handleTweetSearch(tweetsArr) {
+	// Handles Tweet-to-Wiki search started event for loading
+	handleTweetSearchStart() {
 		// Set flag to prevent repeated twitter API calls
 		this.setState({
 			tweetsReady: false
@@ -170,6 +171,10 @@ class Search extends React.Component {
 
 		this.clearContent();
 		this.loadingContent('twit');
+	}
+
+	// Handles Tweet-to-Wiki search completed event with tweets arr data
+	handleTweetSearchDone(tweetsArr) {
 		this.tweetsToWikiSearch(tweetsArr); //Get Wikipedia results for given tweetsArr
 	}
 
@@ -267,7 +272,11 @@ class Search extends React.Component {
 
 		return (
 			<div className="inputs-wrapper">
-				<WikiTweets onTweetSearch={this.handleTweetSearch} tweetsReady={this.state.tweetsReady} />
+				<WikiTweets
+					onTweetSearchStart={this.handleTweetSearchStart}
+					onTweetSearchDone={this.handleTweetSearchDone}
+					tweetsReady={this.state.tweetsReady}
+				/>
 
 				<div className="search-wrapper centered-h">
 					<i className="fas fa-search search-icon" />

@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 import ReactDOM from 'react-dom';
+import regeneratorRuntime from 'regenerator-runtime';
 
 // Components
 import Header from './Components/Header';
