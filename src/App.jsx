@@ -38,16 +38,25 @@ class App extends React.Component {
 			}
 		});
 		observer.observe(document.querySelector('body'));
+
+		// Listen for scroll events to check for top or bottom of page reached
+		const that = this;
+		window.addEventListener('scroll', function(e) {
+			if ($(document).height() === $(window).height() + window.scrollY) {
+				that.updateScrollState('scroll end');
+			} else {
+				that.updateScrollState();
+			}
+		});
 	}
 
-	// Check if body height is greater than window height (ie. scrollable)
-	updateScrollState() {
-		console.log('updateScrollState');
-		let pageScroll = 'none';
-		if ($('body').height() > $(window).height()) pageScroll = 'scrollable';
+	updateScrollState(scrollState = 'none') {
+		// If "scroll end" then update state, else...
+		// Check if body height is greater than window height (ie. scrollable)
+		if (scrollState !== 'scroll end' && $('body').height() > $(window).height()) scrollState = 'scrollable';
 
 		this.setState({
-			pageScroll: pageScroll
+			pageScroll: scrollState
 		});
 	}
 
@@ -63,18 +72,23 @@ class App extends React.Component {
 	render() {
 		const { cardCount, cardContent, contentType, pageScroll } = this.state;
 
-		// let scrollIconClasses = 'fas fa-angle-double-down page-icon';
-		// let scrollIconClasses = 'fas fa-chevron-down page-icon';
-		let scrollIconClasses = 'fas fa-long-arrow-alt-down page-icon';
+		// let scrollIconClasses = 'fas fa-angle-double-down scroll-icon';
+		// let scrollIconClasses = 'fas fa-chevron-down scroll-icon';
+		// let scrollIconClasses = 'fas fa-long-arrow-alt-down scroll-icon';
+		let scrollIconClasses = 'fas fa-angle-down scroll-icon';
 
-		console.log('pageScroll: ', pageScroll);
+		// Check pageScroll state for offscreen content, hide/show scroll icons accordingly
 		if (pageScroll === 'none') scrollIconClasses += ' hidden';
+		else if (pageScroll === 'scroll end') scrollIconClasses = 'fas fa-angle-up scroll-icon';
+
+		const leftIcon = scrollIconClasses + ' scroll-icon--left';
+		const rightIcon = scrollIconClasses + ' scroll-icon--right';
 
 		return (
 			<div className="app-container">
 				<Header />
-				{/* <i className="fas fa-chevron-down page-icon" /> */}
-				<i className={scrollIconClasses} />
+				<i className={leftIcon} />
+				<i className={rightIcon} />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>

@@ -9,14 +9,20 @@
 	max-width: 1200px;
 }
 
-.page-icon {
-	bottom: 20px;
-	color: rgb(176, 176, 176);
+.scroll-icon {
+	bottom: 10px;
+	color: gray;
 	display: block;
+	font-size: 1rem;
 	position: fixed;
-	right: 20px;
+	z-index: 100;
 }
-
+.scroll-icon--right {
+	right: 15px;
+}
+.scroll-icon--left {
+	left: 15px;
+}
 .hidden {
 	display: none;
 }
