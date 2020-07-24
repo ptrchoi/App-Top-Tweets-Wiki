@@ -72,23 +72,69 @@ class App extends React.Component {
 	render() {
 		const { cardCount, cardContent, contentType, pageScroll } = this.state;
 
-		// let scrollIconClasses = 'fas fa-angle-double-down scroll-icon';
-		// let scrollIconClasses = 'fas fa-chevron-down scroll-icon';
-		// let scrollIconClasses = 'fas fa-long-arrow-alt-down scroll-icon';
-		let scrollIconClasses = 'fas fa-angle-down scroll-icon';
+		// let scrollIcon = 'fas fa-angle-double-down scroll-icon';
+		// let scrollIcon = 'fas fa-chevron-down scroll-icon';
+		// let scrollIcon = 'fas fa-long-arrow-alt-down scroll-icon';
+
+		// let scrollIcon = 'fas scroll-icon'; // Base class shared styles
+		// let leftIconDown = (scrollIcon += ' fa-angle-down scroll-icon--left');
+		// let rightIconDown = (scrollIcon += ' fa-angle-down scroll-icon--right');
+		// let leftIconUp = (scrollIcon += ' fa-angle-up scroll-icon--left');
+		// let rightIconUp = (scrollIcon += ' fa-angle-up scroll-icon--right');
+
+		let leftIconDown,
+			rightIconDown,
+			leftIconUp,
+			rightIconUp = '';
 
 		// Check pageScroll state for offscreen content, hide/show scroll icons accordingly
-		if (pageScroll === 'none') scrollIconClasses += ' hidden';
-		else if (pageScroll === 'scroll end') scrollIconClasses = 'fas fa-angle-up scroll-icon';
+		// if (pageScroll === 'none') scrollIcon = 'hidden';
+		// else
+		if (pageScroll === 'none') {
+			leftIconDown = 'hidden';
+			rightIconDown = 'hidden';
+			leftIconUp = 'hidden';
+			rightIconUp = 'hidden';
+		} else if (pageScroll === 'scroll end') {
+			leftIconDown = 'fas fa-angle-down scroll-icon scroll-icon--left fade-out';
+			rightIconDown = 'fas fa-angle-down scroll-icon scroll-icon--right fade-out';
+			leftIconUp = 'fas fa-angle-up scroll-icon scroll-icon--left fade-in';
+			rightIconUp = 'fas fa-angle-up scroll-icon scroll-icon--right fade-in';
+		} else {
+			leftIconDown = 'fas fa-angle-down scroll-icon scroll-icon--left fade-in';
+			rightIconDown = 'fas fa-angle-down scroll-icon scroll-icon--right fade-in';
+			leftIconUp = 'fas fa-angle-up scroll-icon scroll-icon--left fade-out';
+			rightIconUp = 'fas fa-angle-up scroll-icon scroll-icon--right fade-out';
+		}
 
-		const leftIcon = scrollIconClasses + ' scroll-icon--left';
-		const rightIcon = scrollIconClasses + ' scroll-icon--right';
+		// let scrollIcon = 'scroll-icon';
+		// let leftIconDown, rightIconDown, leftIconUp, rightIconUp = scrollIcon;
+
+		// if (pageScroll === 'none') scrollIcon = 'hidden';
+		// else if (pageScroll === 'scroll end') {
+		// 	leftIconDown += ' fade-out';
+		// 	rightIconDown += ' fade-out';
+		// 	leftIconUp += ' fade-in';
+		// 	rightIconUp += ' fade-in';
+		// } else {
+		// 	leftIconDown += ' fade-in';
+		// 	rightIconDown += ' fade-in';
+		// 	leftIconUp += ' fade-out';
+		// 	rightIconUp += ' fade-out';
+		// }
+
+		// console.log('leftIconDown: ', leftIconDown);
+		// console.log('rightIconDown: ', rightIconDown);
+		// console.log('leftIconUp: ', leftIconUp);
+		// console.log('rightIconUp: ', rightIconUp);
 
 		return (
 			<div className="app-container">
 				<Header />
-				<i className={leftIcon} />
-				<i className={rightIcon} />
+				<i className={leftIconDown} />
+				<i className={leftIconUp} />
+				<i className={rightIconDown} />
+				<i className={rightIconUp} />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>
