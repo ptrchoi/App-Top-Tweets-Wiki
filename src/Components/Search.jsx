@@ -277,7 +277,8 @@ class Search extends React.Component {
 					onTweetSearchDone={this.handleTweetSearchDone}
 					tweetsReady={this.state.tweetsReady}
 				/>
-
+				{/* <i className="fas fa-chevron-down" /> */}
+				{/* <i className="fas fa-angle-double-down" /> */}
 				<div className="search-wrapper centered-h">
 					<i className="fas fa-search search-icon" />
 					<Autosuggest

@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 import regeneratorRuntime from 'regenerator-runtime'; // Standalone runtime for Regenerator-compiled generator and async functions.
 
 // Components
@@ -12,9 +13,6 @@ import CardGrid from './Components/CardGrid';
 import './styles/index.scss';
 import './styles/base/app.scss';
 
-// Need to require the image for Parcel to pre-load in the bundler
-const cardImg = require('./images/cardImage.png');
-
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,10 +20,35 @@ class App extends React.Component {
 		this.state = {
 			cardCount: 0,
 			cardContent: [],
-			contentType: 'clear'
+			contentType: 'clear',
+			pageScroll: 'none'
 		};
 
 		this.handleSearchUpdate = this.handleSearchUpdate.bind(this);
+		this.updateScrollState = this.updateScrollState.bind(this);
+	}
+
+	componentDidMount() {
+		// Set ResizeObserver to watch for Element ('body') resizing and update the scrolling state.
+		const observer = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				// each entry is an instance of ResizeObserverEntry
+				// console.log('ResizeObserver el->height: ', entry.contentRect.height);
+				this.updateScrollState();
+			}
+		});
+		observer.observe(document.querySelector('body'));
+	}
+
+	// Check if body height is greater than window height (ie. scrollable)
+	updateScrollState() {
+		console.log('updateScrollState');
+		let pageScroll = 'none';
+		if ($('body').height() > $(window).height()) pageScroll = 'scrollable';
+
+		this.setState({
+			pageScroll: pageScroll
+		});
 	}
 
 	// Content updates from Inputs>Search component (passed to CardGrid component)
@@ -38,10 +61,20 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { cardCount, cardContent, contentType } = this.state;
+		const { cardCount, cardContent, contentType, pageScroll } = this.state;
+
+		// let scrollIconClasses = 'fas fa-angle-double-down page-icon';
+		// let scrollIconClasses = 'fas fa-chevron-down page-icon';
+		let scrollIconClasses = 'fas fa-long-arrow-alt-down page-icon';
+
+		console.log('pageScroll: ', pageScroll);
+		if (pageScroll === 'none') scrollIconClasses += ' hidden';
+
 		return (
 			<div className="app-container">
 				<Header />
+				{/* <i className="fas fa-chevron-down page-icon" /> */}
+				<i className={scrollIconClasses} />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>

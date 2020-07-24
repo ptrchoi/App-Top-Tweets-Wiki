@@ -5,7 +5,7 @@ import React from 'react';
 function Card(props) {
 	let { cards } = props;
 
-	let renderCards = () => {
+	const renderCards = () => {
 		return cards.map((card) => {
 			let imageClassList = 'card-image';
 			let twitIconClassList = 'fab fa-twitter link-icon';
