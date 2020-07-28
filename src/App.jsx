@@ -31,8 +31,8 @@ class App extends React.Component {
 	componentDidMount() {
 		// Set ResizeObserver to watch for Element ('body') resizing and update the scrolling state.
 		const observer = new ResizeObserver((entries) => {
+			// each entry is an instance of ResizeObserverEntry
 			for (const entry of entries) {
-				// each entry is an instance of ResizeObserverEntry
 				// console.log('ResizeObserver el->height: ', entry.contentRect.height);
 				this.updateScrollState();
 			}
@@ -71,29 +71,21 @@ class App extends React.Component {
 
 	// Check pageScroll state for offscreen content, hide/show scroll icon styles accordingly.// Return array of icons with updates styles.
 	getIconStyles(pageScroll) {
-		let leftIconDown = 'fas fa-angle-down scroll-icon scroll-icon--left';
-		let rightIconDown = 'fas fa-angle-down scroll-icon scroll-icon--right';
-		let leftIconUp = 'fas fa-angle-up scroll-icon scroll-icon--left';
-		let rightIconUp = 'fas fa-angle-up scroll-icon scroll-icon--right';
+		let iconDown = 'fas fa-angle-down scroll-icon';
+		let iconUp = 'fas fa-angle-up scroll-icon';
 
 		if (pageScroll === 'none') {
-			leftIconDown = 'hidden';
-			rightIconDown = 'hidden';
-			leftIconUp = 'hidden';
-			rightIconUp = 'hidden';
+			iconDown = 'hidden';
+			iconUp = 'hidden';
 		} else if (pageScroll === 'scroll end') {
-			leftIconDown += ' fade-out';
-			rightIconDown += ' fade-out';
-			leftIconUp += ' fade-in';
-			rightIconUp += ' fade-in';
+			iconDown += ' fade-out';
+			iconUp += ' fade-in';
 		} else {
-			leftIconDown += ' fade-in';
-			rightIconDown += ' fade-in';
-			leftIconUp += ' fade-out';
-			rightIconUp += ' fade-out';
+			iconDown += ' fade-in';
+			iconUp += ' fade-out';
 		}
 
-		return [ leftIconDown, rightIconDown, leftIconUp, rightIconUp ];
+		return [ iconDown, iconUp ];
 	}
 
 	render() {
@@ -103,10 +95,8 @@ class App extends React.Component {
 		return (
 			<div className="app-container">
 				<Header />
-				{/* <i className={icons[0]} /> */}
+				<i className={icons[0]} />
 				<i className={icons[1]} />
-				{/* <i className={icons[2]} /> */}
-				<i className={icons[3]} />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>

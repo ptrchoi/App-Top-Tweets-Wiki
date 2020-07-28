@@ -4,14 +4,12 @@ import React from 'react';
 // Image loading for Parcel bundling
 const imgUS = require('../images/usa.png');
 const imgCA = require('../images/can.png');
-const imgMX = require('../images/mex.png');
 const imgBR = require('../images/brz.png');
 const imgGB = require('../images/gbr.png');
 const imgDE = require('../images/ger.png');
 const imgES = require('../images/spa.png');
 const imgFR = require('../images/fra.png');
 const imgIT = require('../images/ita.png');
-const imgNE = require('../images/net.png');
 
 // Array of Location objs
 const LOCATIONS = [
@@ -100,21 +98,6 @@ const LOCATIONS = [
 		flagImg: imgIT
 	}
 ];
-// REMOVED Locations
-// {
-// 	id: 'input7',
-// 	cityAbb: 'MEX',
-// 	cityFull: 'Mexico City, Mexico',
-// 	WOEID: '116545',
-// 	flagImg: imgMX
-// },
-// {
-// 	id: 'input10',
-// 	cityAbb: 'AMS',
-// 	cityFull: 'Amsterdam, Netherlands',
-// 	WOEID: '727232',
-// 	flagImg: imgNE
-// },
 
 const getCityNameForID = (id) => {
 	return LOCATIONS.find((item) => {
@@ -126,15 +109,15 @@ class Location extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedWOEID: LOCATIONS[0].WOEID // initialize location to S.F.
+			selectedWOEID: LOCATIONS[0].WOEID // initialize location to default (S.F.)
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
 		const defaultID = this.state.selectedWOEID;
-		// Notify parent of initial default location
-		this.props.onLocSelection(defaultID, getCityNameForID(defaultID)); // initialize location to S.F.
+		// Notify parent of initial default location (S.F.)
+		this.props.onLocSelection(defaultID, getCityNameForID(defaultID));
 	}
 	handleChange(e) {
 		let selectedWOEID = e.target.value;

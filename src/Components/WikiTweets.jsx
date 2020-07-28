@@ -17,7 +17,7 @@ if (!String.prototype.splice) {
 // Get top 50 trending tweets by locationID
 function getTrendingOnTwitter(locationID) {
 	if (isNaN(locationID) || locationID <= 0) {
-		locationID = 2487956; //default to SF
+		locationID = 2487956; //default is SF
 	}
 
 	const request = require('request');

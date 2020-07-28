@@ -2,6 +2,7 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+	padding-top: 10px;
 }
 .description-text {
 	color: rgb(108, 108, 108);
@@ -14,16 +15,12 @@
 	font-weight: bold;
 }
 .main-button {
-	// background-color: white;
 	border-radius: 60px;
-	// box-shadow: 8px 8px 12px 3px rgba(0, 0, 0, 0.3), -6px -6px 10px 0 rgba(255, 255, 255, .3);
 	box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
 	border: none;
-	// color: #38a1f3;
 	color: rgb(109, 109, 109);
 	cursor: pointer;
 	font-size: .9rem;
-	// font-weight: bold;
 	height: 3.8rem;
 	line-height: 1.4;
 	margin: 1.8rem;
