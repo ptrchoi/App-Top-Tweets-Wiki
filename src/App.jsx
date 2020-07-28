@@ -103,9 +103,9 @@ class App extends React.Component {
 		return (
 			<div className="app-container">
 				<Header />
-				<i className={icons[0]} />
+				{/* <i className={icons[0]} /> */}
 				<i className={icons[1]} />
-				<i className={icons[2]} />
+				{/* <i className={icons[2]} /> */}
 				<i className={icons[3]} />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
