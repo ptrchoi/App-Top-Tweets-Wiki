@@ -43,6 +43,7 @@
 }
 // Autosuggest dropdown list
 .react-autosuggest__suggestions-list {
+	background-color: rgb(255, 255, 255);
 	border: solid 1px #aaaaaa;
 	color: gray;
 	font-size: 12px;
@@ -54,6 +55,7 @@
 	position: absolute;
 	top: 30px;
 	width: 90%;
+	z-index: 10;
 }
 // Autosuggest list current highlighted selection
 .react-autosuggest__suggestion--highlighted {
