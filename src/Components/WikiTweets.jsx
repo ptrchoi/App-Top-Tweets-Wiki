@@ -102,7 +102,7 @@ class WikiTweets extends React.Component {
 		};
 
 		this.handleClick = this.handleClick.bind(this);
-		this.pauseInput = this.pauseInput.bind(this);
+		this.disableButton = this.disableButton.bind(this);
 		this.handleLocSelection = this.handleLocSelection.bind(this);
 		this.getData = this.getData.bind(this);
 	}
@@ -112,7 +112,7 @@ class WikiTweets extends React.Component {
 		e.preventDefault();
 
 		// Prevent button click events while loading
-		this.pauseInput(tweetsReady);
+		this.disableButton(tweetsReady);
 
 		// Notify parent of ansync Twitter search started
 		this.props.onTweetSearchStart();
@@ -121,8 +121,9 @@ class WikiTweets extends React.Component {
 	}
 
 	// Disable/Enable button input while waiting for Async results to load
-	pauseInput(pause) {
-		$('#twitterButton').prop('disabled', pause);
+	disableButton(tweetsReady) {
+		// If tweetsReady => set disable to False; If !tweetsReady => set disable to True
+		$('#twitterButton').prop('disabled', !tweetsReady);
 	}
 
 	// Handle location updates from <Location> component
@@ -153,6 +154,7 @@ class WikiTweets extends React.Component {
 		if (!tweetsReady) {
 			btnClassList += ' main-button--inactive';
 		}
+
 		return (
 			<div className="wiki-tweets-wrapper">
 				<p className="description-text">
