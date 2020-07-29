@@ -9,6 +9,8 @@
 	max-width: 1200px;
 }
 
+/* Scroll and Loading icon styling
+----------------------------------------------------------------------- */
 .scroll-icon {
 	bottom: 10px;
 	color: gray;
@@ -26,12 +28,12 @@
 	opacity: 0;
 	transition: opacity .15s ease-in-out 0s;
 }
+.hidden {
+	display: none;
+}
 
 /* ANIMATIONS
 ----------------------------------------------------------------------- */
-// .spinning-anim {
-// 	display: none;
-// }
 // Spinning loading icon
 .spinning-anim {
 	bottom: 10px;
@@ -55,6 +57,45 @@
 	}
 }
 
-.hidden {
-	display: none;
+/* RESPONSIVE STYLING
+----------------------------------------------------------------------- */
+// Large screens
+@media only screen and (min-width: 900px) {
+	.spinning-anim {
+		border-top: 12px solid #38a2f3c2;
+		height: 40px;
+		width: 40px;
+		bottom: 30px;
+		right: 30px;
+	}
+}
+// Medium screens
+@media only screen and (max-width: 899px) {
+	.spinning-anim {
+		border-top: 9px solid #38a2f3c2;
+		height: 30px;
+		width: 30px;
+		bottom: 20px;
+		right: 20px;
+	}
+}
+// Small screens
+@media only screen and (max-width: 600px) {
+	.spinning-anim {
+		border-top: 6px solid #38a2f3c2;
+		height: 20px;
+		width: 20px;
+		bottom: 10px;
+		right: 10px;
+	}
+}
+// Landscape orientation
+@media only screen and (orientation: landscape) {
+	.spinning-anim {
+		border-top: 6px solid #38a2f3c2;
+		height: 20px;
+		width: 20px;
+		bottom: 10px;
+		right: 10px;
+	}
 }
