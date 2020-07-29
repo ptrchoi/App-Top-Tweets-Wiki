@@ -71,10 +71,16 @@ class App extends React.Component {
 
 	// Check pageScroll state for offscreen content, hide/show scroll icon styles accordingly.// Return array of icons with updates styles.
 	getIconStyles(pageScroll) {
+		const { contentType } = this.state;
 		let iconDown = 'fas fa-angle-down scroll-icon';
 		let iconUp = 'fas fa-angle-up scroll-icon';
+		let iconLoading = 'hidden';
 
-		if (pageScroll === 'none') {
+		if (contentType === 'loadingTwit' || contentType === 'loadingWiki') {
+			iconDown = 'hidden';
+			iconUp = 'hidden';
+			iconLoading = 'spinning-anim';
+		} else if (pageScroll === 'none') {
 			iconDown = 'hidden';
 			iconUp = 'hidden';
 		} else if (pageScroll === 'scroll end') {
@@ -85,7 +91,7 @@ class App extends React.Component {
 			iconUp += ' fade-out';
 		}
 
-		return [ iconDown, iconUp ];
+		return [ iconDown, iconUp, iconLoading ];
 	}
 
 	render() {
@@ -94,9 +100,10 @@ class App extends React.Component {
 
 		return (
 			<div className="app-container">
-				<Header />
 				<i className={icons[0]} />
 				<i className={icons[1]} />
+				<i className={icons[2]} />
+				<Header />
 				<Search onSearch={this.handleSearchUpdate} />
 				<CardGrid cardCount={cardCount} cardContent={cardContent} contentType={contentType} />
 			</div>

@@ -26,6 +26,35 @@
 	opacity: 0;
 	transition: opacity .15s ease-in-out 0s;
 }
+
+/* ANIMATIONS
+----------------------------------------------------------------------- */
+// .spinning-anim {
+// 	display: none;
+// }
+// Spinning loading icon
+.spinning-anim {
+	bottom: 10px;
+	position: fixed;
+	right: 10px;
+	z-index: 100;
+
+	animation: spin 2s linear infinite;
+	background-color: #fff;
+	border-top: 6px solid #38a2f3c2;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .hidden {
 	display: none;
 }

@@ -10,7 +10,6 @@ function CardGrid(props) {
 	// Update content for title text and classes (ie. show/hide, styles) for animations based on contentType updates.
 	// >>	contentTypes = 'clear' || 'loadingTwit' || 'loadingWiki' || 'search' || 'tweets'
 	let title = '';
-	let spinnerClass = 'spinning-anim';
 	let titleClass = 'title';
 
 	switch (contentType) {
@@ -23,12 +22,10 @@ function CardGrid(props) {
 		case 'loadingWiki':
 			title = 'Searching Wikipedia';
 			titleClass += '--animate';
-			spinnerClass += '--show';
 			break;
 		case 'loadingTwit':
 			title = 'Searching Twitter and Wikipedia';
 			titleClass += '--animate';
-			spinnerClass += '--show';
 			break;
 		default:
 			break;
@@ -37,7 +34,6 @@ function CardGrid(props) {
 	return (
 		<div className="cardgrid-container">
 			<div className="cardgrid-header">
-				<div className={spinnerClass} />
 				<div className={titleClass}>{title}</div>
 			</div>
 			<div className="cardgrid-wrapper masonry">
