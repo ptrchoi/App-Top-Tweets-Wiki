@@ -18,7 +18,7 @@
 
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
-// Button layout on large screens
+// Card layout on large screens
 @media only screen and (min-width: 900px) {
 	.masonry {
 		column-count: 3;
@@ -27,7 +27,7 @@
 		font-size: 1.2rem;
 	}
 }
-// Button layout on medium screens
+// Card layout on medium screens
 @media only screen and (max-width: 899px) {
 	.masonry {
 		column-count: 2;
@@ -36,7 +36,7 @@
 		font-size: 1rem;
 	}
 }
-// Button layout on small screens
+// Card layout on small screens
 @media only screen and (max-width: 600px) {
 	.masonry {
 		column-count: 1;
@@ -45,13 +45,22 @@
 		font-size: .7rem;
 	}
 }
-// Button layout in landscape orientation
+// Card layout in landscape orientation
 @media only screen and (orientation: landscape) {
 	.masonry {
 		column-count: 3;
 	}
 	.cardgrid-title {
 		font-size: 1.2rem;
+	}
+}
+// Card layout on Med & Small screens in landscape orientation
+@media only screen and (max-width: 899px) and (orientation: landscape) {
+	.masonry {
+		column-count: 2;
+	}
+	.cardgrid-title {
+		font-size: 1rem;
 	}
 }
 

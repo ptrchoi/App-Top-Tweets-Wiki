@@ -68,6 +68,11 @@
 		bottom: 30px;
 		right: 30px;
 	}
+	.scroll-icon {
+		bottom: 20px;
+		font-size: 2rem;
+		right: 20px;
+	}
 }
 // Medium screens
 @media only screen and (max-width: 899px) {
@@ -75,12 +80,17 @@
 		border-top: 9px solid #38a2f3c2;
 		height: 30px;
 		width: 30px;
-		bottom: 20px;
-		right: 20px;
+		bottom: 15px;
+		right: 15px;
+	}
+	.scroll-icon {
+		bottom: 10px;
+		font-size: 1.3rem;
+		right: 15px;
 	}
 }
-// Small screens
-@media only screen and (max-width: 600px) {
+// Small screens - Portrait
+@media only screen and (max-width: 600px) and (orientation: portrait) {
 	.spinning-anim {
 		border-top: 6px solid #38a2f3c2;
 		height: 20px;
@@ -88,14 +98,24 @@
 		bottom: 10px;
 		right: 10px;
 	}
+	.scroll-icon {
+		bottom: 10px;
+		font-size: .9rem;
+		right: 10px;
+	}
 }
-// Landscape orientation
-@media only screen and (orientation: landscape) {
+// Small screens - Landscape
+@media only screen and (max-width: 600px) and (orientation: landscape) {
 	.spinning-anim {
 		border-top: 6px solid #38a2f3c2;
 		height: 20px;
 		width: 20px;
 		bottom: 10px;
+		right: 10px;
+	}
+	.scroll-icon {
+		bottom: 10px;
+		font-size: .9rem;
 		right: 10px;
 	}
 }
