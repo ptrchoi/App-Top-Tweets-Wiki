@@ -66,28 +66,6 @@
 
 /* ANIMATIONS
 ----------------------------------------------------------------------- */
-// .spinning-anim {
-// 	display: none;
-// }
-// // Spinning loading icon
-// .spinning-anim--show {
-// 	animation: spin 2s linear infinite;
-// 	background-color: #fff;
-// 	border-top: 6px solid #38a2f3c2;
-// 	border-radius: 50%;
-// 	height: 20px;
-// 	margin-right: 8px;
-// 	width: 20px;
-// }
-// @keyframes spin {
-// 	0% {
-// 		transform: rotate(0deg);
-// 	}
-// 	100% {
-// 		transform: rotate(360deg);
-// 	}
-// }
-// dot-dot-dot loading anim following title
 .title--animate:after {
 	content: '.';
 	animation: dots 1s steps(5, end) infinite;
