@@ -1,72 +1,76 @@
 .wiki-tweets-wrapper {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	padding-top: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
 }
 .description-text {
-	color: rgb(108, 108, 108);
-	font-size: .9rem;
-	line-height: 1.8;
-	margin-bottom: 1.8rem;
-	text-align: center;
+  color: rgb(108, 108, 108);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin-bottom: 1.8rem;
+  text-align: center;
 }
 .text-span {
-	font-weight: bold;
+  font-weight: bold;
 }
 .main-button {
-	background-color: rgb(238, 247, 253);
-	border-radius: 60px;
-	box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2), -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
-	border: none;
-	color: rgb(109, 109, 109);
-	cursor: pointer;
-	font-size: .9rem;
-	height: 3.8rem;
-	line-height: 1.4;
-	margin: 1.8rem;
-	width: 50%;
+  // background-color: rgb(238, 247, 253);
+  background-color: rgb(247, 253, 254);
+
+  border-radius: 60px;
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2),
+    -4px -4px 6px 0 rgba(255, 255, 255, 0.7);
+  border: none;
+  color: rgb(109, 109, 109);
+  cursor: pointer;
+  font-size: 0.9rem;
+  height: 3.8rem;
+  line-height: 1.4;
+  margin: 1.8rem;
+  width: 50%;
 }
 .main-button--inactive {
-	border: none;
-	box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
-	color: rgb(150, 150, 150);
+  border: none;
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+  color: rgb(150, 150, 150);
 }
 #cityName {
-	color: #38a1f3;
-	font-weight: normal;
+  color: #38a1f3;
+  font-weight: normal;
 }
 button:focus {
-	outline: 0;
+  outline: 0;
 }
 
 /* RESPONSIVE STYLING
 ----------------------------------------------------------------------- */
 // Button layout on small screens
 @media only screen and (max-width: 600px) {
-	.description-text {
-		color: rgb(108, 108, 108);
-		font-size: .6rem;
-		line-height: 1.8;
-		margin-bottom: 1.8rem;
-	}
-	.main-button {
-		font-size: .5rem;
-		height: 2.5rem;
-		width: 70%;
-	}
+  .description-text {
+    color: rgb(108, 108, 108);
+    font-size: 0.6rem;
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+  }
+  .main-button {
+    font-size: 0.5rem;
+    height: 2.5rem;
+    width: 70%;
+  }
 }
 // Button layout in landscape orientation
 @media only screen and (orientation: landscape) {
-	.description-text {
-		color: rgb(108, 108, 108);
-		font-size: .9rem;
-		line-height: 1.8;
-		margin-bottom: 1.8rem;
-	}
-	.main-button {
-		font-size: .9rem;
-		height: 3.8rem;
-		width: 50%;
-	}
+  .description-text {
+    color: rgb(108, 108, 108);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+  }
+  .main-button {
+    font-size: 0.9rem;
+    height: 3.8rem;
+    width: 50%;
+  }
 }
